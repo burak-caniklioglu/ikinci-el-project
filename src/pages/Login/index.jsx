@@ -5,7 +5,7 @@ import useWindowSize from '../../hooks/useWindowSize'
 import Logo from '../../constants/icons/Logo';
 
 function Login() {
-    const [width, height] = useWindowSize();
+    const [width,] = useWindowSize();
   return (
     <main className='login-register-main'>
         <figure className='login-register-banner'width={width*0.434}>

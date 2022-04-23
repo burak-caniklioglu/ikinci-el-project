@@ -8,9 +8,6 @@
       height: 100vh;
       margin: 0;
   
-      @include screenSize('xlarge') {
-        width: 40vw;
-      }
       @include screenSize('medium') {
         display: none;
       }
