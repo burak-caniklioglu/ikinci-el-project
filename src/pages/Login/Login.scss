@@ -1,0 +1,26 @@
+@import '../../styles/mixin.scss';
+
+.login-register-main {
+    @include display-flex(row,center);
+    overflow: hidden;
+
+    .login-register-banner {
+      height: 100vh;
+      margin: 0;
+  
+      @include screenSize('xlarge') {
+        width: 40vw;
+      }
+      @include screenSize('medium') {
+        display: none;
+      }
+  
+      img {
+        height: 100vh;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    
+  }
