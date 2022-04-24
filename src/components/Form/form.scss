@@ -2,16 +2,16 @@
 
 .form-wrapper{
   margin-top:5.93vh;
-  width: 52.68%;
-  background-color: $formBackground;
+  width: 48.68%;
+  background-color: $_FFFFFFF;
   border-radius: 8px;
   box-shadow: 0px 3px 12px #1E36480A;
   @include screenSize('xlarge') {
     width: 100%;
-    max-width: 40vw;
+    max-width: 50vw;
   }
   @include screenSize('large') {
-    max-width: 50vw;
+    max-width: 60vw;
   }
   @include screenSize('medium') {
     max-width: 70vw;
@@ -21,7 +21,7 @@
     width: 68.36%;
     margin: 0 auto;
     text-align: center;
-    color: $textColor;
+    color: $_525252;
     h1{
       font-size: 3.2rem;
       font-weight: bold;
@@ -47,7 +47,7 @@
           border-radius: 8px;
           border: none;
           outline: none;
-          background-color: $inputBackround;
+          background-color: $_F4F4F4;
           &::placeholder{
             padding-left: 1rem;
           }
@@ -59,7 +59,7 @@
           border-radius: 8px;
           border: none;
           outline: none;
-          background-color: $inputBackround;
+          background-color: $_F4F4F4;
           &::placeholder{
             font-size: 3rem;
             letter-spacing: 0.2rem;
@@ -68,8 +68,8 @@
         }
         input:active,
         input:focus {
-        outline: 1px solid $inputFocusOutline;
-        background-color: $inputFocusBackground;
+        outline: 1px solid $_4B9CE2;
+        background-color: $_F0F8FF;
         }
       }
       .forgotten-password{
@@ -89,8 +89,8 @@
         height: 4.5rem;
         border-radius: 8px;
         border: none;
-        background-color: $loginBtn;
-        color: $formBackground;
+        background-color: $_4B9CE2;
+        color: $_FFFFFFF;
         font-size: 1.8rem;
         margin-top: 2vh;
         margin-bottom: 2vh;
@@ -103,7 +103,7 @@
         font-size: 1.5rem;
         margin-bottom: 7vh;
         span{
-          color: $loginBtn;
+          color: $_4B9CE2;
         }
       }
       

@@ -7,7 +7,7 @@ import Logo from "../../constants/icons/Logo";
 import Form from "../../components/Form";
 
 function Login() {
-  const [width] = useWindowSize();
+  const [width,] = useWindowSize();
   return (
     <main className="login-register-main">
       <figure className="login-register-banner" width={width * 0.434}>

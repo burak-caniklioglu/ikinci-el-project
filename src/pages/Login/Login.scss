@@ -2,7 +2,7 @@
 
 
 .login-register-main {
-    background-color: $loginMain;
+    background-color: $_FBFBFB;
     @include display-flex(row,center);
     overflow-y: hidden;
     
