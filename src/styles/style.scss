@@ -1,0 +1,13 @@
+@import './reset.scss';
+@import './mixin';
+@import './variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+
+:root{
+    font-size: 10px;
+}
+
+*{
+    font-family: 'Nunito', sans-serif;
+}

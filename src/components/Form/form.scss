@@ -1,0 +1,112 @@
+@import '../../styles/style.scss';
+
+.form-wrapper{
+  margin-top:5.93vh;
+  width: 52.68%;
+  background-color: $formBackground;
+  border-radius: 8px;
+  box-shadow: 0px 3px 12px #1E36480A;
+  @include screenSize('xlarge') {
+    width: 100%;
+    max-width: 40vw;
+  }
+  @include screenSize('large') {
+    max-width: 50vw;
+  }
+  @include screenSize('medium') {
+    max-width: 70vw;
+  }
+
+  .form-header{
+    width: 68.36%;
+    margin: 0 auto;
+    text-align: center;
+    color: $textColor;
+    h1{
+      font-size: 3.2rem;
+      font-weight: bold;
+      margin-top: 7.47vh;
+    }
+    .form-header-desc{
+      font-size: 1.5rem;
+      margin-top: 1vh;
+    }
+    form{
+      margin-top:5.34vh;
+      div{
+        margin-bottom: 2vh;
+        label{
+          text-align: left;
+          display: block;
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+        }
+        input[type="email"] {
+          width: 100%;
+          height: 4.5rem;
+          border-radius: 8px;
+          border: none;
+          outline: none;
+          background-color: $inputBackround;
+          &::placeholder{
+            padding-left: 1rem;
+          }
+          
+        }
+        input[type="password"]{
+          width: 100%;
+          height: 4.5rem;
+          border-radius: 8px;
+          border: none;
+          outline: none;
+          background-color: $inputBackround;
+          &::placeholder{
+            font-size: 3rem;
+            letter-spacing: 0.2rem;
+            padding-left: 1rem;
+          }
+        }
+        input:active,
+        input:focus {
+        outline: 1px solid $inputFocusOutline;
+        background-color: $inputFocusBackground;
+        }
+      }
+      .forgotten-password{
+        margin-top: -1vh;
+        text-align: right;
+        a{
+          
+          text-decoration: none;
+          font-size: 1rem;
+          &:hover{
+            opacity: 0.7;
+          }
+        }
+      }
+      .login-register-btn{
+        width: 100%;
+        height: 4.5rem;
+        border-radius: 8px;
+        border: none;
+        background-color: $loginBtn;
+        color: $formBackground;
+        font-size: 1.8rem;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        &:hover{
+          background-color: #000;
+          color: #fff;
+        }
+      }
+      .account-query{
+        font-size: 1.5rem;
+        margin-bottom: 7vh;
+        span{
+          color: $loginBtn;
+        }
+      }
+      
+    }
+  }
+}
