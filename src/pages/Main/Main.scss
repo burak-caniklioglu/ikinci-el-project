@@ -1,0 +1,21 @@
+@import "../../styles/style.scss";
+
+.main-section {
+  max-height: calc(100vh - 8rem);
+  width: 100%;
+  overflow-y: auto;
+  background-color: $_F2F2F2;
+  @include screenSize("medium") {
+    max-height: calc(100vh - 6rem);
+  }
+
+  .main-container {
+    padding-top: 2rem;
+    max-width: 1480px;
+    margin: 0 auto;
+    @include screenSize("medium") {
+      max-width: calc(100vw - 2rem);
+      padding-top: 1rem;
+    }
+  }
+}
