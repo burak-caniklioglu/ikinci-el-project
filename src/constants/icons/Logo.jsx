@@ -1,10 +1,13 @@
-import React from "react";
+import React from 'react';
+import propTypes from 'prop-types';
 
-function Logo(props) {
+// eslint-disable-next-line react/prop-types
+function Logo({ size }) {
   return (
-    <svg className="logo"
+    <svg
+      className="logo"
       xmlns="http://www.w3.org/2000/svg"
-      width={props.size || "224.489"}
+      width={size || '224.489'}
       height="73.195"
       viewBox="0 0 224.489 73.195"
     >
@@ -150,5 +153,8 @@ function Logo(props) {
     </svg>
   );
 }
+Logo.protoTypes = {
+  size: propTypes.string,
+};
 
 export default Logo;

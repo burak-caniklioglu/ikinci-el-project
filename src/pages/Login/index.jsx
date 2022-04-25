@@ -1,13 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Login.scss";
-import useWindowSize from "../../hooks/useWindowSize";
-import Logo from "../../constants/icons/Logo";
-import Form from "../../components/Form";
-import LoginBanner from "../../components/LoginBanner/LoginBanner";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Login.scss';
+import useWindowSize from '../../hooks/useWindowSize';
+import Logo from '../../constants/icons/Logo';
+import Form from '../../components/Form';
+import LoginBanner from '../../components/LoginBanner/LoginBanner';
 
 function Login() {
-  const [width,] = useWindowSize();
+  const [width] = useWindowSize();
   return (
     <main className="login-register-main">
       <figure className="login-register-banner" width={width * 0.434}>
