@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import formSchema from '../../constants/formSchema/formShema';
-// import toastify from '../../helper funcs/toastify';
+import toastify from '../../helper funcs/toastify';
 import DownArrow from '../../constants/icons/DownArrow';
 import './form.scss';
 
@@ -24,15 +24,15 @@ function Form() {
         email: values.email,
         password: values.password,
       });
+      const data = await response;
+      console.log(data);
       navigate('/');
-      console.log(response.data);
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 400) {
+        toastify('error', 'Email already exists');
+      }
     }
   };
-
-  // const handleOnChange = (e) => {
-  // };
 
   return (
     <div className="form-wrapper">
@@ -48,7 +48,20 @@ function Form() {
             password: '',
           }}
           onSubmit={(values) => {
-            submitHandler(values);
+            const errors = {};
+            if (!values.email) {
+              errors.email = 'Email is required';
+              toastify('error', 'Email is required');
+            } else if (!values.password) {
+              errors.password = 'Password is required';
+              toastify('error', 'Password is required');
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+              errors.email = 'Invalid email address';
+              toastify('error', 'Invalid email address');
+            } else if (values.password.length < 6) {
+              errors.password = 'Password must be at least 6 characters';
+              toastify('error', 'Password must be at least 6 characters');
+            } else { submitHandler(values); }
           }}
           validationSchema={formSchema}
         >
@@ -56,9 +69,9 @@ function Form() {
             values,
             handleChange,
             handleSubmit,
-            // errors,
             handleBlur,
             // touched,
+            // errors,
           }) => (
             <form onSubmit={handleSubmit}>
               <div>
@@ -72,7 +85,6 @@ function Form() {
                     autoComplete={inIndex ? 'on' : 'off'}
                     value={values.email}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                   />
                   {inIndex && <DownArrow />}
                 </label>
