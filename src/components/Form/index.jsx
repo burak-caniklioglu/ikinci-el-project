@@ -1,38 +1,79 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
-import formSchema from '../../constants/formSchema/formShema';
+import Cookies from 'js-cookie';
+import axios from '../../api/axios';
 import toastify from '../../helper funcs/toastify';
 import DownArrow from '../../constants/icons/DownArrow';
 import './form.scss';
-
-import axios from '../../api/axios';
+import checkAuth from '../../helper funcs/checkAuth';
+// import { useUser } from '../../contexts/UserContext';
 
 function Form() {
+  // const { setAuth } = useUser();
   const [inIndex, setInIndex] = useState();
+  const [err, setErr] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
     if (location.pathname === '/register') setInIndex(false);
     else setInIndex(true);
   }, [location]);
-  const REGİSTER_URL = '/auth/local/register';
+  const REGISTER_URL = '/auth/local/register';
+  const LOGIN_URL = '/auth/local';
   const submitHandler = async (values) => {
-    try {
-      const response = await axios.post(REGİSTER_URL, {
-        username: values.email,
-        email: values.email,
-        password: values.password,
-      });
-      const data = await response;
-      console.log(data);
-      navigate('/');
-    } catch (error) {
-      if (error.response.status === 400) {
-        toastify('error', 'Email already exists');
+    if (!inIndex) {
+      try {
+        const response = await axios.post(REGISTER_URL, {
+          username: values.email.split('@')[0],
+          email: values.email,
+          password: values.password,
+        });
+        const { jwt } = await response.data;
+        console.log(response);
+        Cookies.set('token', jwt);
+        Cookies.set('user', response.data.user.email);
+        toastify(
+          'success',
+          'Giriş başarılı anasayfaya yönlendiriliyorsunuz!',
+        );
+        navigate('/');
+      } catch (error) {
+        if (error.response.status === 400) {
+          toastify('error', 'Email zaten kullanılıyor');
+        } else {
+          toastify('error', 'Bir hata oluştu');
+        }
+      }
+    } else {
+      try {
+        const response = await axios.post(LOGIN_URL, {
+          identifier: values.email,
+          password: values.password,
+        });
+        const data = await response;
+        console.log(data);
+        toastify(
+          'success',
+          'Giriş başarılı anasayfaya yönlendiriliyorsunuz!',
+        );
+        navigate('/');
+      } catch (error) {
+        console.log(error.response);
+        if (error.response.status === 400) {
+          toastify('error', 'Email ya da şifre yanlış');
+        } else {
+          toastify('error', 'Bir hata oluştu');
+        }
       }
     }
   };
+
+  useEffect(() => {
+    if (checkAuth()) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <div className="form-wrapper">
@@ -51,26 +92,27 @@ function Form() {
             const errors = {};
             if (!values.email) {
               errors.email = 'Email is required';
-              toastify('error', 'Email is required');
+              toastify('error', 'Email alanı boş bırakılamaz');
+              setErr(errors);
             } else if (!values.password) {
               errors.password = 'Password is required';
-              toastify('error', 'Password is required');
+              toastify('error', 'Şifre alanı boş bırakılamaz');
+              setErr(errors);
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
               errors.email = 'Invalid email address';
-              toastify('error', 'Invalid email address');
+              toastify('error', 'Email adresi geçersiz');
+              setErr(errors);
             } else if (values.password.length < 6) {
               errors.password = 'Password must be at least 6 characters';
-              toastify('error', 'Password must be at least 6 characters');
+              toastify('error', 'Şifre en az 6 karakter olmalı');
+              setErr(errors);
             } else { submitHandler(values); }
           }}
-          validationSchema={formSchema}
         >
           {({
             values,
             handleChange,
             handleSubmit,
-            handleBlur,
-            // touched,
             // errors,
           }) => (
             <form onSubmit={handleSubmit}>
@@ -78,6 +120,7 @@ function Form() {
                 <label htmlFor="email">
                   E-posta
                   <input
+                    className={`${err.email ? 'error' : ''}`}
                     type="email"
                     id="email"
                     name="email"
@@ -85,6 +128,7 @@ function Form() {
                     autoComplete={inIndex ? 'on' : 'off'}
                     value={values.email}
                     onChange={handleChange}
+
                   />
                   {inIndex && <DownArrow />}
                 </label>
@@ -93,6 +137,7 @@ function Form() {
                 <label htmlFor="password">
                   Şifre
                   <input
+                    className={`${err.password ? 'error' : ''}`}
                     type="password"
                     id="password"
                     name="password"
@@ -100,7 +145,7 @@ function Form() {
                     autoComplete="off"
                     value={values.password}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+
                   />
                 </label>
               </div>

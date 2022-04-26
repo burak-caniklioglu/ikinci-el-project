@@ -72,11 +72,16 @@
               padding-left: 1rem;
             }
           }
+          input.error {
+            outline: 1px solid $_F77474;
+            background-color: $_FFF2F2;
+          }
           input:active,
           input:focus {
           outline: 1px solid $_4B9CE2;
           background-color: $_F0F8FF;
           }
+          
         }
         
       }
