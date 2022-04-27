@@ -6,6 +6,7 @@ import Login from '../pages/LoginRegister';
 import Main from '../pages/Main';
 import NotFound from '../pages/Not-Found';
 import ProductDetail from '../pages/Product-Detail';
+import PrivateRouter from './PrivateRouter';
 
 function Router() {
   return (
@@ -14,10 +15,14 @@ function Router() {
       <Route path="/" element={<Main />} exact />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Login />} />
-      <Route path="/myaccount" element={<Account />} />
-      <Route path="/productdetail/:id" element={<ProductDetail />} />
-      <Route path="/addproduct" element={<AddProduct />} />
       <Route path="*" element={<NotFound />} />
+
+      <Route element={<PrivateRouter />}>
+        <Route path="/myaccount" element={<Account />} />
+        <Route path="/productdetail/:id" element={<ProductDetail />} />
+        <Route path="/addproduct" element={<AddProduct />} />
+      </Route>
+
     </Routes>
 
   );

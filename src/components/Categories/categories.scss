@@ -7,7 +7,7 @@
     .category-area {
       @include display-flex(row, center, space-between);
       max-width: 100%;
-      overflow-x: auto;
+      overflow-y: scroll;
       -ms-overflow-style: none;
       scrollbar-width: none;
   

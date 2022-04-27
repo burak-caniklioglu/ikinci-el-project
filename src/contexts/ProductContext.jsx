@@ -23,6 +23,7 @@ function ProductProvider({ children }) {
         activeCategory,
         setActiveCategory,
         products,
+        setProducts,
       }}
     >
       {children}
