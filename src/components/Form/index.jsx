@@ -47,16 +47,23 @@ function Form() {
       }
     } else {
       try {
-        const response = await axios.post(LOGIN_URL, {
-          identifier: values.email,
-          password: values.password,
-        });
-        const data = await response;
-        console.log(data);
-        toastify(
-          'success',
-          'Giriş başarılı anasayfaya yönlendiriliyorsunuz!',
-        );
+        const token = Cookies.get('token');
+        if (!token) {
+          const response = await axios.post(LOGIN_URL, {
+            identifier: values.email,
+            password: values.password,
+          });
+          const data = await response;
+          const { jwt } = await response.data;
+          console.log(data);
+          Cookies.set('token', jwt);
+          Cookies.set('user', response.data.user.email);
+          toastify(
+            'success',
+            'Giriş başarılı anasayfaya yönlendiriliyorsunuz!',
+          );
+        }
+
         navigate('/');
       } catch (error) {
         console.log(error.response);

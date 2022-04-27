@@ -3,18 +3,20 @@ import './Main.scss';
 import MainBanner from '../../components/MainBanner/MainBanner';
 import Navbar from '../../components/Navbar';
 import Categories from '../../components/Categories/Categories';
+import Products from '../../components/Products';
 
 function Main() {
   return (
     <>
       <Navbar />
       <main className="main-section">
-        <div className="main-container">
+        <section className="main-container">
           <figure className="main-banner">
             <MainBanner />
           </figure>
           <Categories />
-        </div>
+          <Products />
+        </section>
       </main>
 
     </>
