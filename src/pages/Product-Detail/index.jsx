@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import ProductDetailButtons from '../../components/ProductDetailButtons';
 import './product-detail.scss';
 
 function ProductDetail() {
@@ -8,7 +9,7 @@ function ProductDetail() {
   const { product } = location.state;
   console.log(product);
   const {
-    image, name, brand, color, status,
+    image, name, brand, color, status, price, description,
   } = product;
   return (
     <>
@@ -35,6 +36,16 @@ function ProductDetail() {
                   <span className="strong">Kullanım Durumu:</span>
                   {status}
                 </p>
+              </div>
+              <div className="content-price">
+                {price}
+                {' '}
+                TL
+              </div>
+              <ProductDetailButtons />
+              <div className="content-desc">
+                <p className="strong">Açıklama</p>
+                <p className="content-desc-text">{description}</p>
               </div>
             </div>
           </div>

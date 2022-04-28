@@ -36,6 +36,45 @@
                 margin-bottom: 1.5rem;
             }
         }
+        &-content{
+            width: 53%;
+            padding: 1rem 6rem;
+            color: $_525252;
+            font-size: 1.5rem;
+            @include screenSize("medium") {
+                @include display-flex(column, unset, unset);
+                padding: 0.6rem;
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+            
+
+            .content-title{
+                font-size: 3.4rem;
+                font-weight: 500;
+                margin-bottom: 2.5rem;
+                color: $_555555;
+                @include screenSize("medium") {
+                    font-size: 1.8rem;
+                    margin-bottom: 1rem;
+                }
+            }
+            .content-info-brand,.content-info-color,.content-info-status{
+                margin-bottom: 2rem;
+            }
+            .strong {
+                display: inline-block;
+                font-weight: 700;
+                width: 15rem;
+            }
+
+            .content-price{
+                margin-top:  10px;
+                font-size: 3.4rem;
+                font-weight: bold;
+                margin-bottom: 30px;
+            }
+        }
 }
 
 
