@@ -1,0 +1,41 @@
+@import "../../styles/style.scss";
+
+.product-detail-container{
+    
+    min-height: calc(100vh - 10rem);
+    width: 100%;
+    background-color: $_F2F2F2;
+    padding-top:2rem;
+    @include screenSize("medium") {
+        min-height: calc(100vh - 8rem);
+    }
+    .product-detail-wrapper{
+        max-width: calc(100vw - 24.5%) ;
+        margin: 0 auto;
+        background-color: $_FFFFFFF;
+        padding: 1.5rem 1.6rem;
+        border-radius: 0.8rem;
+        
+        
+    }
+}
+.product-detail{
+        width: 100%;
+        @include display-flex(row, unset, unset);
+        border-radius: 0.8rem;
+        max-height: calc(100vh - 22rem);
+        @include screenSize("medium") {
+            @include display-flex(column, unset, unset);
+        }
+        &-img {
+            width: 47%;
+            overflow: hidden;
+            border-radius: 0.8rem;
+            @include screenSize("medium") {
+                width: 100%;
+                margin-bottom: 1.5rem;
+            }
+        }
+}
+
+

@@ -14,7 +14,7 @@ function Categories() {
     <section className="category-container">
       <ul className="category-area">
         {categories?.map((item) => (
-          <Link to={`?category=${item.name}`} key={item.id}>
+          <Link to="/" key={item.id}>
             <div
               onClick={() => setActiveCategory(item.name)}
               className={

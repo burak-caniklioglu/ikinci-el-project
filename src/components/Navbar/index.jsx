@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import './navbar.scss';
 import Logo from '../../constants/icons/Logo';
@@ -9,8 +9,6 @@ import useWindowSize from '../../hooks/useWindowSize';
 
 function Navbar() {
   const [width] = useWindowSize();
-  const location = useLocation();
-  const isHome = location.pathname === '/';
   const isAuth = Cookies.get('token');
   return (
     <nav className="nav">
@@ -21,7 +19,7 @@ function Navbar() {
           </Link>
         </div>
         <div className="nav-btns">
-          {isAuth && isHome && (
+          {isAuth && (
           <Link to="/addproduct">
             <button type="button" className="nav-btn btn-add-product">
               <Plus />
@@ -31,11 +29,12 @@ function Navbar() {
 
             </button>
           </Link>
-          )}
+          ) }
           {isAuth ? (
             <Link to="/myaccount">
               <button type="button" className="nav-btn btn-add-product">
                 <Login />
+                {' '}
                 Hesabım
               </button>
             </Link>

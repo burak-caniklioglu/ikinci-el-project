@@ -15,7 +15,6 @@ function useCategories() {
             },
           },
         );
-        console.log(response);
         const { data } = response;
         setCategories([{ id: 0, name: 'Hepsi' }, ...data.slice(0, 13), { id: data.length, name: 'Diğer' }]);
       } catch (error) {

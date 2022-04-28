@@ -1,16 +1,20 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import propTypes from 'prop-types';
 import './product.scss';
+import { useProduct } from '../../contexts/ProductContext';
 
 function Product({ product }) {
+  const { moreClick } = useProduct();
   const {
     brand, color, price, image,
   } = product;
   return (
-    <div className="card__item">
-      <div className="card__item-img">
+    <div className="card__item" onClick={() => moreClick(product)}>
+      <figure className="card__item-img">
         <img src={`https://bootcamp.akbolat.net${image.url}`} alt="item-img" />
-      </div>
+      </figure>
       <div className="card__item-content">
         <div className="card__item-info">
           <p className="card__item-info-brand">{brand}</p>
