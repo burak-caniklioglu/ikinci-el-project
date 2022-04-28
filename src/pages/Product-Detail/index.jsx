@@ -7,7 +7,6 @@ import './product-detail.scss';
 function ProductDetail() {
   const location = useLocation();
   const { product } = location.state;
-  console.log(product);
   const {
     image, name, brand, color, status, price, description,
   } = product;

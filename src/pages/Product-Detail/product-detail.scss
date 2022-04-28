@@ -1,80 +1,130 @@
 @import "../../styles/style.scss";
 
-.product-detail-container{
-    
-    min-height: calc(100vh - 10rem);
-    width: 100%;
-    background-color: $_F2F2F2;
-    padding-top:2rem;
+.product-detail-container {
+  min-height: calc(100vh - 10rem);
+  width: 100%;
+  background-color: $_F2F2F2;
+  padding-top: 2rem;
+  @include screenSize("medium") {
+    min-height: calc(100vh - 8rem);
+  }
+  .product-detail-wrapper {
+    max-width: calc(100vw - 24.5%);
+    margin: 0 auto;
+    background-color: $_FFFFFFF;
+    padding: 1.5rem 1.6rem;
+    border-radius: 0.8rem;
+  }
+}
+.product-detail {
+  width: 100%;
+  @include display-flex(row, unset, unset);
+  border-radius: 0.8rem;
+  max-height: calc(100vh - 22rem);
+  @include screenSize("medium") {
+    @include display-flex(column, unset, unset);
+  }
+  &-img {
+    width: 47%;
+    overflow: hidden;
+    border-radius: 0.8rem;
     @include screenSize("medium") {
-        min-height: calc(100vh - 8rem);
+      width: 100%;
+      margin-bottom: 1.5rem;
     }
-    .product-detail-wrapper{
-        max-width: calc(100vw - 24.5%) ;
+  }
+  &-content {
+    width: 53%;
+    padding: 1rem 6rem;
+    color: $_525252;
+    font-size: 1.5rem;
+    @include screenSize("medium") {
+      @include display-flex(column, unset, unset);
+      padding: 0.6rem;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .content-title {
+      font-size: 3.4rem;
+      font-weight: 500;
+      margin-bottom: 2.5rem;
+      color: $_555555;
+      @include screenSize("medium") {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+    }
+    .content-info-brand,
+    .content-info-color,
+    .content-info-status {
+      margin-bottom: 2rem;
+    }
+    .strong {
+      display: inline-block;
+      font-weight: 700;
+      width: 15rem;
+    }
+
+    .content-price {
+      margin-top: 10px;
+      font-size: 3.4rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .content-btn-area {
+      margin: 2rem 0;
+      @include screenSize("medium") {
+        @include display-flex(row, center, center);
+        position: fixed;
+        left: 0;
+        bottom: 0;
         margin: 0 auto;
-        background-color: $_FFFFFFF;
-        padding: 1.5rem 1.6rem;
-        border-radius: 0.8rem;
-        
-        
-    }
-}
-.product-detail{
         width: 100%;
-        @include display-flex(row, unset, unset);
+        background-color: $_FFFFFFF;
+        padding: 1rem 0;
+        box-shadow: 0px -3px 8px rgba(30, 54, 72, 0.08);
+      }
+      .btn {
+        height: 4.5rem;
+        max-width: 23.5rem;
+        width: 47%;
+        font-size: 1.8rem;
+        border: none;
         border-radius: 0.8rem;
-        max-height: calc(100vh - 22rem);
-        @include screenSize("medium") {
-            @include display-flex(column, unset, unset);
+      }
+      .buy {
+        background-color: $_4B9CE2;
+        color: $_FFFFFFF;
+        margin-right: 1rem;
+        &:hover {
+          background-color: $_F0F8FF;
+          color: $_4B9CE2;
+          outline: 1px solid $_4B9CE2;
         }
-        &-img {
-            width: 47%;
-            overflow: hidden;
-            border-radius: 0.8rem;
-            @include screenSize("medium") {
-                width: 100%;
-                margin-bottom: 1.5rem;
-            }
+      }
+      .offer {
+        background-color: $_F0F8FF;
+        color: $_4B9CE2;
+        &:hover {
+          background-color: $_4B9CE2;
+          color: $_F0F8FF;
+          outline: 1px solid $_4B9CE2;
         }
-        &-content{
-            width: 53%;
-            padding: 1rem 6rem;
-            color: $_525252;
-            font-size: 1.5rem;
-            @include screenSize("medium") {
-                @include display-flex(column, unset, unset);
-                padding: 0.6rem;
-                width: 100%;
-                margin-bottom: 2rem;
-            }
-            
-
-            .content-title{
-                font-size: 3.4rem;
-                font-weight: 500;
-                margin-bottom: 2.5rem;
-                color: $_555555;
-                @include screenSize("medium") {
-                    font-size: 1.8rem;
-                    margin-bottom: 1rem;
-                }
-            }
-            .content-info-brand,.content-info-color,.content-info-status{
-                margin-bottom: 2rem;
-            }
-            .strong {
-                display: inline-block;
-                font-weight: 700;
-                width: 15rem;
-            }
-
-            .content-price{
-                margin-top:  10px;
-                font-size: 3.4rem;
-                font-weight: bold;
-                margin-bottom: 30px;
-            }
-        }
+      }
+    }
+    .content-desc {
+      margin-top: 1rem;  
+      max-width: 60%;
+      @include screenSize("medium") {
+        max-width: 100%;
+        margin-bottom: 1rem;
+      }
+      &-text {
+        padding: 1rem 0;
+        line-height: 2rem;
+      }
+    }
+  }
 }
-
-
