@@ -31,6 +31,7 @@ function Form() {
         });
         const { jwt } = await response.data;
         console.log(response);
+        Cookies.set('myId', response.data.user.id);
         Cookies.set('token', jwt);
         Cookies.set('user', response.data.user.email);
         toastify(
@@ -56,6 +57,7 @@ function Form() {
           const data = await response;
           const { jwt } = await response.data;
           console.log(data);
+          Cookies.set('myId', response.data.user.id);
           Cookies.set('token', jwt);
           Cookies.set('user', response.data.user.email);
           toastify(

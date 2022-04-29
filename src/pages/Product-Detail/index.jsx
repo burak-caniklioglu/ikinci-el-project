@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import ConfirmModal from '../../components/ConfirmModal';
 import Navbar from '../../components/Navbar';
+import OfferModal from '../../components/OfferModal';
 import ProductDetailButtons from '../../components/ProductDetailButtons';
 import './product-detail.scss';
 
 function ProductDetail() {
   const location = useLocation();
+  const [displayConfirmModal, setDisplayConfirmModal] = useState(false);
+  const [displayOfferModal, setDisplayOfferModal] = useState(false);
   const { product } = location.state;
   const {
     image, name, brand, color, status, price, description,
@@ -41,7 +45,11 @@ function ProductDetail() {
                 {' '}
                 TL
               </div>
-              <ProductDetailButtons />
+              <ProductDetailButtons
+                product={product}
+                setConfirmModal={setDisplayConfirmModal}
+                setOfferModal={setDisplayOfferModal}
+              />
               <div className="content-desc">
                 <p className="strong">Açıklama</p>
                 <p className="content-desc-text">{description}</p>
@@ -50,6 +58,16 @@ function ProductDetail() {
           </div>
         </div>
       </main>
+
+      <ConfirmModal
+        displayModal={displayConfirmModal}
+        closeModal={() => setDisplayConfirmModal(false)}
+      />
+      <OfferModal
+        displayModal={displayOfferModal}
+        closeModal={() => setDisplayOfferModal(false)}
+        product={product}
+      />
     </>
   );
 }
