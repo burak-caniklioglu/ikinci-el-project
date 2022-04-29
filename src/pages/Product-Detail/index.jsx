@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import ConfirmModal from '../../components/ConfirmModal';
+import GivenOffer from '../../components/GivenOffer';
 import Navbar from '../../components/Navbar';
 import OfferModal from '../../components/OfferModal';
 import ProductDetailButtons from '../../components/ProductDetailButtons';
+import { useProduct } from '../../contexts/ProductContext';
 import './product-detail.scss';
 
 function ProductDetail() {
-  const location = useLocation();
+  const { product } = useProduct();
   const [displayConfirmModal, setDisplayConfirmModal] = useState(false);
   const [displayOfferModal, setDisplayOfferModal] = useState(false);
-  const { product } = location.state;
   const {
     image, name, brand, color, status, price, description,
   } = product;
@@ -44,6 +44,7 @@ function ProductDetail() {
                 {price}
                 {' '}
                 TL
+                <GivenOffer product={product} />
               </div>
               <ProductDetailButtons
                 product={product}
@@ -66,7 +67,6 @@ function ProductDetail() {
       <OfferModal
         displayModal={displayOfferModal}
         closeModal={() => setDisplayOfferModal(false)}
-        product={product}
       />
     </>
   );

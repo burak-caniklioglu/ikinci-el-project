@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import propTypes from 'prop-types';
 import Cookies from 'js-cookie';
+import axios from '../../api/axios';
 import sendOffer from '../../api/sendOffer';
 import './offer-modal.scss';
+import { useProduct } from '../../contexts/ProductContext';
 
-function OfferModal({ displayModal, closeModal, product }) {
+function OfferModal({ displayModal, closeModal }) {
+  const { product, setProduct } = useProduct();
   const [selectedOption, setSelectedOption] = useState(0);
   const [offer, setOffer] = useState({ offeredPrice: 0 });
   const [customPrice, setCustomPrice] = useState('');
@@ -13,7 +16,7 @@ function OfferModal({ displayModal, closeModal, product }) {
   const myID = Cookies.get('myId');
 
   useEffect(() => {
-    setIsValid(customPrice.match(/^\d+$/) !== null);
+    setIsValid(customPrice.match(/^\d+?.$/) !== null);
   }, [customPrice]);
 
   useEffect(() => {
@@ -52,23 +55,24 @@ function OfferModal({ displayModal, closeModal, product }) {
     };
   }, [displayModal, closeModal]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (selectedOption === 3 && isValid && customPrice !== '') {
-      sendOffer.post('/offers', {
+      await sendOffer.post('/offers', {
         product: product.id,
         offerPrice: parseFloat(customPrice),
         users_permissions_user: myID,
       });
-      closeModal();
     }
     if (selectedOption !== 3) {
-      sendOffer.post('/offers', {
+      await sendOffer.post('/offers', {
         product: product.id,
         offerPrice: offer.offeredPrice,
         users_permissions_user: myID,
       });
-      closeModal();
     }
+    const response = await axios(`/products/${product.id}`);
+    setProduct(response.data);
+    closeModal();
   };
 
   const {
@@ -175,7 +179,6 @@ function OfferModal({ displayModal, closeModal, product }) {
 OfferModal.propTypes = {
   displayModal: propTypes.bool.isRequired,
   closeModal: propTypes.func.isRequired,
-  id: propTypes.number,
 };
 
 export default OfferModal;

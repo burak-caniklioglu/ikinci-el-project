@@ -9,19 +9,20 @@ const ProductContext = React.createContext();
 function ProductProvider({ children }) {
   const [activeCategory, setActiveCategory] = useState('Hepsi');
   const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState({});
   const navigate = useNavigate();
-  const moreClick = (product) => {
-    navigate(`/productdetail/${product.id}`, { state: { product } });
+  const moreClick = (item) => {
+    navigate(`/productdetail/${item.id}`);
+    setProduct(item);
   };
 
   useEffect(() => {
     const getProducts = async () => {
       const response = await axios.get('/products');
       setProducts(response.data);
-      console.log(response.data);
     };
     getProducts();
-  }, [activeCategory]);
+  }, []);
   return (
     <ProductContext.Provider
       value={{
@@ -29,6 +30,8 @@ function ProductProvider({ children }) {
         setActiveCategory,
         products,
         setProducts,
+        product,
+        setProduct,
         moreClick,
       }}
     >
