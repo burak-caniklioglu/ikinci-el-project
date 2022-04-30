@@ -8,7 +8,7 @@ import './offer-modal.scss';
 import { useProduct } from '../../contexts/ProductContext';
 
 function OfferModal({ displayModal, closeModal }) {
-  const { product, setProduct } = useProduct();
+  const { product, setProduct, setProducts } = useProduct();
   const [selectedOption, setSelectedOption] = useState(0);
   const [offer, setOffer] = useState({ offeredPrice: 0 });
   const [customPrice, setCustomPrice] = useState('');
@@ -72,6 +72,8 @@ function OfferModal({ displayModal, closeModal }) {
     }
     const response = await axios(`/products/${product.id}`);
     setProduct(response.data);
+    const newProducts = await axios('/products');
+    setProducts(newProducts.data);
     closeModal();
   };
 

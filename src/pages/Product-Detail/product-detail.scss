@@ -71,6 +71,38 @@
       font-size: 3.4rem;
       font-weight: bold;
       margin-bottom: 30px;
+      @include screenSize('medium') {
+        @include display-flex(row, baseline, space-between);
+        font-size: 2rem;
+        margin: 0;
+      }
+      .content-given-offer {
+        background-color: $_F2F2F2;
+        color: $_B1B1B1;
+        width: 21rem;
+        border-radius: 0.8rem;
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        font-weight: 500;
+        padding: 0.8rem 1rem;
+
+        .given-price {
+          color: $_525252;
+          font-weight: bolder;
+          &::after {
+            content: ' TL';
+          }
+        }
+        @include screenSize('medium') {
+          width: unset;
+        }
+      }
+    }
+    .offer-false {
+      color: $_F77474 !important;
+    }
+    .offer-true {
+      color: $_46AF32 !important;
     }
 
     .content-btn-area {
@@ -112,6 +144,12 @@
           color: $_F0F8FF;
           outline: 1px solid $_4B9CE2;
         }
+      }
+      .sold{
+        background-color: $_FFF0E2;
+        color: $_FAAD60;
+        width: 100%;
+        cursor: default;
       }
     }
     .content-desc {

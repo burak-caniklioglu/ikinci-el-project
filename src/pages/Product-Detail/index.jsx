@@ -4,6 +4,7 @@ import GivenOffer from '../../components/GivenOffer';
 import Navbar from '../../components/Navbar';
 import OfferModal from '../../components/OfferModal';
 import ProductDetailButtons from '../../components/ProductDetailButtons';
+
 import { useProduct } from '../../contexts/ProductContext';
 import './product-detail.scss';
 
@@ -47,7 +48,6 @@ function ProductDetail() {
                 <GivenOffer product={product} />
               </div>
               <ProductDetailButtons
-                product={product}
                 setConfirmModal={setDisplayConfirmModal}
                 setOfferModal={setDisplayOfferModal}
               />

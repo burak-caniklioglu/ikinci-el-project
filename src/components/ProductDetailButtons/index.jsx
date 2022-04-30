@@ -5,7 +5,7 @@ import { useProduct } from '../../contexts/ProductContext';
 import sendOffer from '../../api/sendOffer';
 import axios from '../../api/axios';
 
-function ProductDetailButtons({ setOfferModal }) {
+function ProductDetailButtons({ setOfferModal, setConfirmModal }) {
   const { product, setProduct } = useProduct();
   const myID = Cookies.get('myId');
   const { offers } = product;
@@ -31,10 +31,10 @@ function ProductDetailButtons({ setOfferModal }) {
 
   return (
     <div className="content-btn-area">
-      <button type="submit" className="btn buy">Satın Al</button>
+      <button type="submit" className="btn buy" onClick={() => setConfirmModal(true)}>Satın Al</button>
 
       {!product.isOfferable && (
-      <button type="submit" className="btn btn-offer btn-disabled">Bu Ürüne Teklif Verilemez</button>
+      <button type="submit" className="btn offer btn-disabled">Bu Ürüne Teklif Verilemez</button>
       )}
 
       {product?.isOfferable && givenOffer && (
@@ -52,6 +52,7 @@ function ProductDetailButtons({ setOfferModal }) {
 
 ProductDetailButtons.propTypes = {
   setOfferModal: propTypes.func.isRequired,
+  setConfirmModal: propTypes.func.isRequired,
 };
 
 export default ProductDetailButtons;
