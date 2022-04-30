@@ -12,7 +12,7 @@ function ProductProvider({ children }) {
   const [product, setProduct] = useState({});
   const navigate = useNavigate();
   const moreClick = (item) => {
-    navigate(`/productdetail/${item.id}`, { state: { product: item } });
+    navigate(`/productdetail/${item.id}`);
     setProduct(item);
   };
 
