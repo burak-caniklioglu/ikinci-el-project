@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from '../api/axios';
 import { useProduct } from '../contexts/ProductContext';
 
-function useCategories() {
-  const { categories, setCategories } = useProduct();
-  const [customCategories, setCustomCategories] = useState([]);
+function useColor() {
+  const { colors, setColors } = useProduct();
 
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
@@ -12,16 +11,14 @@ function useCategories() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          '/categories',
+          '/colors',
           {
             headers: {
               'Content-Type': 'application/json',
             },
           },
         );
-        const { data } = response;
-        setCategories(data);
-        setCustomCategories([{ id: 0, name: 'Hepsi' }, ...data.slice(0, 13), { id: data.length, name: 'Diğer' }]);
+        setColors(response.data);
         console.log(response.data);
       } catch (error) {
         console.log(error.response);
@@ -32,7 +29,7 @@ function useCategories() {
       isCurrent = true;
     };
   }, []);
-  return [customCategories, categories];
+  return colors;
 }
 
-export default useCategories;
+export default useColor;

@@ -1,0 +1,43 @@
+@import "../../styles/style.scss";
+.dropdown {
+    width: 96.71%;
+    margin-top:0.5rem;
+    position: relative;
+
+  }
+  .dropdown .dropdown-btn {
+    padding: 15px 20px;
+    background: $_F2F2F2;
+    border-radius: 0.8rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+  }
+  
+  .dropdown .dropdown-content {
+    position: absolute;
+    max-height: 10rem;
+    overflow: auto;
+    border-bottom-left-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    top: 90%;
+    left: 0;
+    padding: 10px;
+    background: $_F2F2F2;
+    font-weight: 500;
+    color: #333;
+    width: 94.2%;
+    z-index: 1;
+  }
+  .dropdown .dropdown-content .dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dropdown .dropdown-content .dropdown-item:hover {
+    background: #f4f4f4;
+  }
+  

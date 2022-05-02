@@ -22,7 +22,7 @@ function ProductDetail() {
       setProduct(response.data);
     };
     getProduct();
-  }, [productId]);
+  }, [product.Id]);
 
   const {
     image, name, brand, color, status, price, description,
@@ -36,7 +36,7 @@ function ProductDetail() {
           <div className="product-detail-wrapper">
             <div className="product-detail">
               <figure className="product-detail-img">
-                <img src={`https://bootcamp.akbolat.net${image.url}`} alt="product-img" />
+                <img src={`https://bootcamp.akbolat.net${image?.url}`} alt="product-img" />
               </figure>
               <div className="product-detail-content">
                 <div className="content-title">{name}</div>

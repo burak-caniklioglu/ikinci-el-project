@@ -8,6 +8,10 @@ const ProductContext = React.createContext();
 
 function ProductProvider({ children }) {
   const [activeCategory, setActiveCategory] = useState('Hepsi');
+  const [categories, setCategories] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [usingStatus, setUsingStatus] = useState([]);
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
   const navigate = useNavigate();
@@ -33,6 +37,14 @@ function ProductProvider({ children }) {
         product,
         setProduct,
         moreClick,
+        categories,
+        setCategories,
+        colors,
+        setColors,
+        brands,
+        setBrands,
+        usingStatus,
+        setUsingStatus,
       }}
     >
       {children}

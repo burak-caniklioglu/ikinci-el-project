@@ -11,7 +11,7 @@ function Product({ product }) {
   return (
     <div className="card__item" role="none" onClick={() => moreClick(product)}>
       <figure className="card__item-img">
-        <img src={`https://bootcamp.akbolat.net${image.url}`} alt="item-img" />
+        <img src={`https://bootcamp.akbolat.net${image?.url}`} alt="item-img" />
       </figure>
       <div className="card__item-content">
         <div className="card__item-info">

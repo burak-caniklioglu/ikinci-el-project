@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useProduct } from '../../contexts/ProductContext';
@@ -8,22 +6,23 @@ import './categories.scss';
 
 function Categories() {
   const { activeCategory, setActiveCategory } = useProduct();
-  const categories = useCategories();
+  const [customCategories] = useCategories();
 
   return (
     <section className="category-container">
       <ul className="category-area">
-        {categories?.map((item) => (
-          <Link to="/" key={item.id}>
+        {customCategories?.map((item) => (
+          <Link to="/" key={item?.id}>
             <div
-              onClick={() => setActiveCategory(item.name)}
+              role="none"
+              onClick={() => setActiveCategory(item?.name)}
               className={
-              activeCategory === item.name
+              activeCategory === item?.name
                 ? 'category-area-item item-active'
                 : 'category-area-item'
             }
             >
-              {item.name.trim()}
+              {item?.name.trim()}
             </div>
           </Link>
         ))}

@@ -4,8 +4,7 @@
   display: grid;
     
   grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
-  column-gap: 2rem;
-  row-gap: 2rem;
+  gap: 2rem  2rem;
   justify-items: center;
   margin-bottom: 16rem;
   @include screenSize('small') {
