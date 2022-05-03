@@ -1,33 +1,78 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import useBrands from '../../hooks/useBrands';
 import useCategories from '../../hooks/useCategories';
 import useColor from '../../hooks/useColor';
 import useUsingStatus from '../../hooks/useUsingStatuses';
+import ImageUploader from '../ImageUploader';
+import sendOffer from '../../api/sendOffer';
 import formAddProductSchema from '../../constants/formSchema/formAddProductSchema';
-import DropdownItems from '../Dropdown/DropdownItems';
-import ImageUploder from '../ImageUploader';
+// import DropdownItems from '../Dropdown/DropdownItems';
+import ToggleSwitch from '../ToggleSwitch';
 import './addProductForm.scss';
+import { useProduct } from '../../contexts/ProductContext';
+import axios from '../../api/axios';
 
 function AddProductForm() {
-  const [, categories] = useCategories();
+  const [categories] = useCategories();
   const brands = useBrands();
   const colors = useColor();
   const usingStatuses = useUsingStatus();
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [fileList, setFileList] = useState([]);
+  const { setProducts } = useProduct();
+  const myID = Cookies.get('myId');
+
+  const handlePreview = (file) => {
+    setPreviewImage(file.thumbUrl);
+    setPreviewVisible(true);
+  };
+
+  const handleUpload = ({ file }) => {
+    setFileList([file]);
+  };
+
+  const submitHandler = async (productData) => {
+    let mounted = true;
+    if (mounted) {
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(productData));
+      if (fileList.length > 0 || fileList[0].size < 400000) {
+        formData.append('files.image', fileList[0].originFileObj);
+      } else {
+        return;
+      }
+      const response = await sendOffer.post('/products', formData)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+      mounted = false;
+      setFileList([]);
+      const newProducts = await axios('/products');
+      setProducts(newProducts.data);
+    }
+  };
   return (
     <Formik
       initialValues={{
-        name: '',
-        description: '',
-        category: '',
-        brand: '',
-        color: '',
-        usingStatus: '',
-
+        name: null,
+        description: null,
+        category: null,
+        brand: null,
+        color: null,
+        status: null,
+        price: null,
+        isSold: false,
+        isOfferable: false,
+        users_permissions_user: myID,
       }}
       validationSchema={formAddProductSchema}
       onSubmit={(values) => {
-        console.log(values);
+        submitHandler(values);
       }}
     >
       {({
@@ -37,7 +82,7 @@ function AddProductForm() {
         handleSubmit,
       }) => (
         <form onSubmit={handleSubmit} className="add-product-content-wrapper">
-          <div>
+          <div className="add-product-content-detail-wrapper">
             <div className="add-product-content-detail">
               <h1>Ürün Detayları</h1>
               <div className="form-row">
@@ -75,56 +120,60 @@ function AddProductForm() {
               <div className="form-row-multi">
                 <div className="input-group">
                   <label htmlFor="category"> Kategori</label>
-                  <DropdownItems
-                    options={categories}
-                    placeholder="Kategori Seç"
-                  />
+                  <select className="custom-select" name="category" id="category" value={values.category} onChange={handleChange}>
+                    <option value="">Kategori Seç</option>
+                    {categories.map((category) => (
+                      <option key={category.id} value={category.id}>{category.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="input-group">
                   <label htmlFor="brand">
                     Marka
                   </label>
-                  <DropdownItems
-                    options={brands}
-                    placeholder="Marka Seç"
-                  />
+                  <select className="custom-select" name="brand" id="brand" value={values.brand} onChange={handleChange}>
+                    <option value="">Marka Seç</option>
+                    {brands.map((brand) => (
+                      <option key={brand.id} value={brand.name}>{brand.name}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="form-row-multi">
                 <div className="input-group">
                   <label htmlFor="color">Renk</label>
-                  <DropdownItems
-                    options={colors}
-                    placeholder="Renk Seç"
-                  />
-                  <span>{errors.color}</span>
+                  <select className="custom-select" name="color" id="color" value={values.color} onChange={handleChange}>
+                    <option value="">Renk Seç</option>
+                    {colors.map((color) => (
+                      <option key={color.id} value={color.name}>{color.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="input-group">
                   <label htmlFor="status">Kullanım Durumu</label>
-                  <DropdownItems
-                    options={usingStatuses}
-                    placeholder="Kullanım Durumunu Seç"
-                  />
+                  <select className="custom-select" name="status" id="status" value={values.status} onChange={handleChange}>
+                    <option value="">Kullanım Durumu Seç</option>
+                    {usingStatuses.map((Status) => (
+                      <option key={Status.id} value={Status.name}>{Status.name}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
               <div className="form-row price-row">
-                <label htmlFor="price">
-                  Fiyat
-                  <input
-                    type="text"
-                    name="price"
-                    id="price"
-                    className={errors?.price ? 'not-valid' : 'price'}
-                    placeholder="Bir fiyat girin"
-                    value={values.price}
-                    onChange={handleChange}
-                  />
-
-                </label>
+                <label htmlFor="price">Fiyat</label>
+                <input
+                  type="text"
+                  name="price"
+                  id="price"
+                  className={errors?.price ? 'not-valid' : 'price'}
+                  placeholder="Bir fiyat girin"
+                  value={Number(values.price)}
+                  onChange={handleChange}
+                />
                 <p className={errors?.price ? 'not-valid-ico' : ''}>TL</p>
                 {errors?.price && (
-                <span>Bir fiyat girin. </span>
+                <span>Lütfen geçerli bir tutar giriniz. (Örnek: 123.45)</span>
                 )}
               </div>
               <div className="form-row offer-row">
@@ -139,13 +188,15 @@ function AddProductForm() {
                     {' '}
                   </label>
                 )}
-                {/* <ToggleSwitch value={values.isOfferable} onChange={handleChange} /> */}
+                <ToggleSwitch value={values.isOfferable} onChange={handleChange} />
               </div>
-              <ImageUploder />
-              <button type="submit">
-                Kaydet
-              </button>
             </div>
+          </div>
+          <div className="right-side">
+            <ImageUploader handleUpload={handleUpload} handlePreview={handlePreview} />
+            <button type="submit" className="save-btn">
+              Kaydet
+            </button>
           </div>
         </form>
       )}

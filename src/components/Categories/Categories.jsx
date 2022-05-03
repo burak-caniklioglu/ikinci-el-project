@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProduct } from '../../contexts/ProductContext';
 import useCategories from '../../hooks/useCategories';
@@ -6,7 +6,12 @@ import './categories.scss';
 
 function Categories() {
   const { activeCategory, setActiveCategory } = useProduct();
-  const [customCategories] = useCategories();
+  const [categories] = useCategories();
+  const [customCategories, setCustomCategories] = useState([]);
+
+  useEffect(() => {
+    setCustomCategories([{ id: 0, name: 'Hepsi' }, ...categories.slice(0, 13), { id: categories.length, name: 'Diğer' }]);
+  }, [categories]);
 
   return (
     <section className="category-container">

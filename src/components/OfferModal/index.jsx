@@ -6,6 +6,7 @@ import axios from '../../api/axios';
 import sendOffer from '../../api/sendOffer';
 import './offer-modal.scss';
 import { useProduct } from '../../contexts/ProductContext';
+import UndefinedProduct from '../../constants/images/undefinedProduct.jpg';
 
 function OfferModal({ displayModal, closeModal }) {
   const { product, setProduct, setProducts } = useProduct();
@@ -91,7 +92,7 @@ function OfferModal({ displayModal, closeModal }) {
           <div className="modal-info-body">
             <div className="product-info">
               <div className="product-info-left">
-                <img src={`https://bootcamp.akbolat.net${image.url}`} alt={name} />
+                <img src={product?.image === null ? UndefinedProduct : `https://bootcamp.akbolat.net${image?.url}`} alt={name} />
                 <p className="product-title">
                   {name}
                 </p>

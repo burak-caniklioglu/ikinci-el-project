@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from '../api/axios';
 import { useProduct } from '../contexts/ProductContext';
 
 function useCategories() {
   const { categories, setCategories } = useProduct();
-  const [customCategories, setCustomCategories] = useState([]);
 
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
@@ -21,8 +20,6 @@ function useCategories() {
         );
         const { data } = response;
         setCategories(data);
-        setCustomCategories([{ id: 0, name: 'Hepsi' }, ...data.slice(0, 13), { id: data.length, name: 'Diğer' }]);
-        console.log(response.data);
       } catch (error) {
         console.log(error.response);
       }
@@ -32,7 +29,7 @@ function useCategories() {
       isCurrent = true;
     };
   }, []);
-  return [customCategories, categories];
+  return [categories];
 }
 
 export default useCategories;

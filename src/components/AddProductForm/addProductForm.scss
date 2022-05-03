@@ -1,15 +1,32 @@
 @import "../../styles/style.scss";
 
 .add-product-content-wrapper {
-  width: 54.56%;
-  border-right: 1px solid $_FFFFFFF;
   font-family: 'Nunito', sans-serif;
+  @include display-flex(row,unset,unset);
   @include screenSize("medium") {
-    border-right: none;
+    @include display-flex(column,unset,unset);
     width: 100%;
   }
+  
+  .right-side{
+    width: 45.46%;
+    @include screenSize('medium') {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+  .add-product-content-detail-wrapper{
+    width: 54.54%;
+    border-right: 1px solid $_F2F2F2;
+    @include screenSize('medium') {
+      width: 100%;
+      border-right: none;
+    }
+  }
+
   .add-product-content-detail{
     max-width: 73rem;
+    padding-left: 0.1rem;
     label {
       color: $_525252;
       font-size: 1.5rem;
@@ -60,11 +77,32 @@
       width: 100%;
       margin-bottom: 2.5rem;
       @include display-flex(column);
+      @include screenSize("medium") {
+        width: 100%;
+      }
+    }
+
+    .price-row{
+      width:32.32%;
+      position: relative;
+      @include screenSize("medium") {
+        width: 100%;
+      }
+    }
+    .price-row p{
+      position: absolute;
+      font-size: 1.6rem;
+      top: 50%;
+      left: 80%;
+      color: rgba(153, 160, 167, 1);
+      @include screenSize("medium") {
+        left: 90%;
+      }
     }
   
     .offer-row {
       @include display-flex(row, center, space-between);
-      width: 45%;
+      width:32.32%;
   
       .offeropt {
         margin-right: 1rem;
@@ -94,4 +132,40 @@
     }
   }
   
+}
+
+.custom-select{
+  width: 96.71%;
+  position: relative;
+  margin-top:0.5rem;
+  height: 4.5rem;
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 0.8rem;
+  outline: none;
+  background-color: $_F4F4F4;
+  @include screenSize("medium") {
+    margin-bottom: 1rem;
+    padding: 1rem 0.15rem;
+    width: 100%;
+  }
+}
+
+.save-btn{
+  width: 31.5rem;
+  height: 4.5rem;
+  border: none;
+  border-radius: 0.8rem;
+  outline: none;
+  background-color: $_4B9CE2;
+  color: $_FFFFFFF;
+  font-size: 1.6rem;
+  margin-top: 48.4rem;
+  float: right;
+  @include screenSize("medium") {
+    margin-top: 010rem;
+    margin-bottom: 1rem;
+    float: none;
+    width: 100%;
+  }
 }

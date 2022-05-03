@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^4.20.2",
     "axios": "^0.26.1",
     "formik": "^2.2.9",
     "js-cookie": "^3.0.1",

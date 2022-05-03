@@ -1,12 +1,12 @@
 @import '../../styles/style.scss';
 
 .add-product-container {
-  min-height: calc(100vh - 10rem);
+  min-height: calc(100vh - 8rem);
   width: 100%;
   background-color: $_F2F2F2;
   padding-top: 2rem;
   @include screenSize("medium") {
-    min-height: calc(100vh - 8rem);
+    min-height: calc(100vh - 6rem);
   }
 
     .add-product-wrapper{
@@ -17,9 +17,8 @@
       border-radius: 0.8rem;
       .add-product {
         width: 100%;
-        overflow-y: auto;
         @include screenSize('medium') {
-          max-height: calc(100vh - 10rem);
+          min-height: calc(100vh - 10rem);
         }
       
         h1 {
@@ -33,8 +32,7 @@
           }
         }
       
-        add-product-content {
-          @include display-flex(row, unset, unset);
+        .add-product-content {
           @include screenSize('medium') {
             flex-direction: column;
           }
