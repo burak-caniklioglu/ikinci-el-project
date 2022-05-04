@@ -1,0 +1,55 @@
+@import "../../styles/style.scss";
+
+.account-container {
+  min-height: calc(100vh - 8rem);
+  width: 100%;
+  background-color: $_F2F2F2;
+  padding-top: 2rem;
+  @include screenSize("medium") {
+    min-height: calc(100vh - 6rem);
+  }
+
+  .account-wrapper {
+    max-width: calc(100vw - 24.5%);
+    margin: 0 auto;
+    
+
+    .account-info {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 1);
+      border-radius: 0.8rem;
+
+      &-wrapper {
+        @include display-flex(row, center, flex-start);
+
+        padding: 0.8rem 3rem;
+
+        p {
+          margin-left: 1rem;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: rgba(82, 82, 82, 1);
+          background-color: rgba(255, 255, 255, 1);
+        }
+      }
+    }
+
+    .account-content {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 1);
+      border-radius: 0.8rem;
+      margin-top: 1rem;
+
+      .offer-list {
+        margin-top: 1.5rem;
+        padding: 0 3rem;
+        max-height: calc(100vh - 24rem);
+        @include screenSize("medium") {
+          max-height: calc(100vh - 22rem);
+          padding: 0 1rem;
+        }
+        overflow: auto;
+      }
+    }
+  }
+}

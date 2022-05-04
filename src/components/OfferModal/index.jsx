@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import propTypes from 'prop-types';
 import Cookies from 'js-cookie';
-import axios from '../../api/axios';
 import sendOffer from '../../api/sendOffer';
 import './offer-modal.scss';
 import { useProduct } from '../../contexts/ProductContext';
-import UndefinedProduct from '../../constants/images/undefinedProduct.jpg';
+import UndefinedProduct from '../../constants/images/undefinedProduct.webp';
+import axios from '../../api/axios';
 
 function OfferModal({ displayModal, closeModal }) {
-  const { product, setProduct, setProducts } = useProduct();
+  const {
+    product, setProduct, setProducts,
+  } = useProduct();
   const [selectedOption, setSelectedOption] = useState(0);
   const [offer, setOffer] = useState({ offeredPrice: 0 });
   const [customPrice, setCustomPrice] = useState('');
@@ -92,7 +94,7 @@ function OfferModal({ displayModal, closeModal }) {
           <div className="modal-info-body">
             <div className="product-info">
               <div className="product-info-left">
-                <img src={product?.image === null ? UndefinedProduct : `https://bootcamp.akbolat.net${image?.url}`} alt={name} />
+                <img src={product?.image === 'null' ? UndefinedProduct : `https://bootcamp.akbolat.net${image?.formats?.thumbnail?.url}`} alt={name} />
                 <p className="product-title">
                   {name}
                 </p>
@@ -176,7 +178,7 @@ function OfferModal({ displayModal, closeModal }) {
 
       </section>
     </main>,
-    document.getElementById('modal'),
+    document.getElementById('root'),
   );
 }
 OfferModal.propTypes = {

@@ -4,6 +4,7 @@
 import { Formik } from 'formik';
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 import useBrands from '../../hooks/useBrands';
 import useCategories from '../../hooks/useCategories';
 import useColor from '../../hooks/useColor';
@@ -27,6 +28,7 @@ function AddProductForm() {
   const [fileList, setFileList] = useState([]);
   const { setProducts } = useProduct();
   const myID = Cookies.get('myId');
+  const navigate = useNavigate();
 
   const handlePreview = (file) => {
     setPreviewImage(file.thumbUrl);
@@ -54,18 +56,19 @@ function AddProductForm() {
       setFileList([]);
       const newProducts = await axios('/products');
       setProducts(newProducts.data);
+      navigate('/myaccount');
     }
   };
   return (
     <Formik
       initialValues={{
-        name: null,
-        description: null,
-        category: null,
-        brand: null,
-        color: null,
-        status: null,
-        price: null,
+        name: '',
+        description: '',
+        category: '',
+        brand: '',
+        color: '',
+        status: '',
+        price: '',
         isSold: false,
         isOfferable: false,
         users_permissions_user: myID,

@@ -10,7 +10,7 @@ function ProductDetailButtons({ setOfferModal, setConfirmModal }) {
   const myID = Cookies.get('myId');
   const { offers } = product;
   let givenOffer;
-  offers.map((offer) => {
+  offers?.map((offer) => {
     if (offer.users_permissions_user === Number(myID)) {
       givenOffer = offer;
     }
@@ -33,7 +33,7 @@ function ProductDetailButtons({ setOfferModal, setConfirmModal }) {
     <div className="content-btn-area">
       <button type="submit" className="btn buy" onClick={() => setConfirmModal(true)}>Satın Al</button>
 
-      {!product.isOfferable && (
+      {!product?.isOfferable && (
       <button type="submit" className="btn offer btn-disabled">Bu Ürüne Teklif Verilemez</button>
       )}
 

@@ -5,7 +5,7 @@ import GivenOffer from '../../components/GivenOffer';
 import Navbar from '../../components/Navbar';
 import OfferModal from '../../components/OfferModal';
 import ProductDetailButtons from '../../components/ProductDetailButtons';
-import UndefinedProduct from '../../constants/images/undefinedProduct.jpg';
+import UndefinedProduct from '../../constants/images/undefinedProduct.webp';
 import { useProduct } from '../../contexts/ProductContext';
 import './product-detail.scss';
 
@@ -29,7 +29,7 @@ function ProductDetail() {
     return () => {
       isMounted = false;
     };
-  }, [product.id]);
+  }, []);
 
   const {
     image, name, brand, color, status, price, description,
@@ -43,7 +43,7 @@ function ProductDetail() {
           <div className="product-detail-wrapper">
             <div className="product-detail">
               <figure className="product-detail-img">
-                <img src={product?.image === null ? UndefinedProduct : `https://bootcamp.akbolat.net${image?.url}`} alt="product-img" />
+                <img src={product?.image === 'null' || !image?.formats?.small ? UndefinedProduct : `https://bootcamp.akbolat.net${image?.formats?.small?.url}`} alt="product-img" />
               </figure>
               <div className="product-detail-content">
                 <div className="content-title">{name}</div>

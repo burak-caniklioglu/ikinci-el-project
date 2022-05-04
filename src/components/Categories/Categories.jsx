@@ -10,7 +10,7 @@ function Categories() {
   const [customCategories, setCustomCategories] = useState([]);
 
   useEffect(() => {
-    setCustomCategories([{ id: 0, name: 'Hepsi' }, ...categories.slice(0, 13), { id: categories.length, name: 'Diğer' }]);
+    setCustomCategories([{ id: -1, name: 'Hepsi' }, ...categories.slice(0, 13), { id: categories.length, name: 'Diğer' }]);
   }, [categories]);
 
   return (

@@ -16,15 +16,15 @@ function ProductProvider({ children }) {
   const [product, setProduct] = useState({});
   const navigate = useNavigate();
   const moreClick = (item) => {
-    navigate(`/productdetail/${item.id}`);
+    navigate(`/productdetail/${item?.id}`);
     setProduct(item);
   };
 
+  const getProducts = async () => {
+    const response = await axios.get('/products');
+    setProducts(response.data);
+  };
   useEffect(() => {
-    const getProducts = async () => {
-      const response = await axios.get('/products');
-      setProducts(response.data);
-    };
     getProducts();
   }, []);
   return (
@@ -45,6 +45,7 @@ function ProductProvider({ children }) {
         setBrands,
         usingStatus,
         setUsingStatus,
+        getProducts,
       }}
     >
       {children}

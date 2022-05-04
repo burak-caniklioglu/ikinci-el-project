@@ -4,12 +4,13 @@ import propTypes from 'prop-types';
 // import Cookies from 'js-cookie';
 import sendOffer from '../../api/sendOffer';
 import { useProduct } from '../../contexts/ProductContext';
-import axios from '../../api/axios';
 import './confirm-modal.scss';
 
 function ConfirmModal({ displayModal, closeModal }) {
   // const myID = Cookies.get('myId');
-  const { product, setProduct, setProducts } = useProduct();
+  const {
+    product, products, setProduct, setProducts,
+  } = useProduct();
   useEffect(() => {
     const closeEscapeKey = (e) => {
       if (displayModal) {
@@ -30,10 +31,8 @@ function ConfirmModal({ displayModal, closeModal }) {
       isOfferable: false,
       // users_permissions_user: myID,
     });
-    const newProduct = await axios(`/products/${product.id}`);
-    setProduct(newProduct.data);
-    const response = await axios('/products');
-    setProducts(response.data);
+    setProduct({ ...product, isSold: true, isOfferable: false });
+    setProducts([...products, product]);
     closeModal();
   };
   return ReactDOM.createPortal(
@@ -65,7 +64,7 @@ function ConfirmModal({ displayModal, closeModal }) {
         </div>
       </div>
     </div>,
-    document.getElementById('modal'),
+    document.getElementById('root'),
   );
 }
 

@@ -8,7 +8,7 @@ function GivenOffer() {
   const { offers, isOfferable } = product;
 
   let givenOffer;
-  offers.map((offer) => {
+  offers?.map((offer) => {
     if (offer.users_permissions_user === Number(myID)) {
       givenOffer = offer;
     }
