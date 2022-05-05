@@ -2,7 +2,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import axios from '../api/axios';
+import sendOffer from '../api/sendOffer';
 
 const ProductContext = React.createContext();
 
@@ -14,6 +16,9 @@ function ProductProvider({ children }) {
   const [usingStatus, setUsingStatus] = useState([]);
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
+  const [givenOffers, setGivenOffers] = useState([]);
+  const [receivedOffers, setReceivedOffers] = useState([]);
+
   const navigate = useNavigate();
   const moreClick = (item) => {
     navigate(`/productdetail/${item?.id}`);
@@ -23,6 +28,16 @@ function ProductProvider({ children }) {
   const getProducts = async () => {
     const response = await axios.get('/products');
     setProducts(response.data);
+  };
+
+  const myID = Cookies.get('myId');
+  const handleGivenOffers = async () => {
+    const response = await sendOffer.get(`/offers?users_permissions_user=${myID}`);
+    setGivenOffers(response.data);
+  };
+  const handleReceivedOffers = async () => {
+    const response = await sendOffer.get(`/products?users_permissions_user=${myID}`);
+    setReceivedOffers(response.data);
   };
   useEffect(() => {
     getProducts();
@@ -46,6 +61,12 @@ function ProductProvider({ children }) {
         usingStatus,
         setUsingStatus,
         getProducts,
+        givenOffers,
+        setGivenOffers,
+        receivedOffers,
+        setReceivedOffers,
+        handleGivenOffers,
+        handleReceivedOffers,
       }}
     >
       {children}

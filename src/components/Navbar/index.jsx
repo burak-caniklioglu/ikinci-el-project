@@ -11,7 +11,7 @@ import { useProduct } from '../../contexts/ProductContext';
 function Navbar() {
   const [width] = useWindowSize();
   const isAuth = Cookies.get('token');
-  const { getProducts } = useProduct();
+  const { getProducts, handleGivenOffers, handleReceivedOffers } = useProduct();
 
   return (
     <nav className="nav">
@@ -27,7 +27,11 @@ function Navbar() {
         <div className="nav-btns">
           {isAuth && (
           <Link to="/addproduct">
-            <button type="button" className="nav-btn btn-add-product">
+            <button
+              type="button"
+              className="nav-btn btn-add-product"
+              onClick={() => handleGivenOffers() && handleReceivedOffers()}
+            >
               <Plus />
               {' '}
               {width > 576 && 'Ürün Ekle'}

@@ -6,7 +6,6 @@ import ConfirmModal from '../ConfirmModal';
 
 function OfferListInfo({ type, item }) {
   const [displayModal, setDisplayModal] = useState(false);
-  // const myID = Cookies.get('myId');
 
   const givenOffered = () => (
     <p className="text-offered">Satıcıdan bilgi bekleniyor</p>
@@ -82,7 +81,6 @@ function OfferListInfo({ type, item }) {
   const receivedAccepted = () => <p className="text-confirm">Teklif onaylandın, Alıcıdan cevap bekleniyor.</p>;
   const receivedPurchased = () => <p className="text-purchased">Satıldı</p>;
 
-  console.log(item?.product?.isSold);
   switch (type) {
     case 'givenOffers':
       switch (item?.isStatus === true) {
@@ -94,6 +92,9 @@ function OfferListInfo({ type, item }) {
         case false:
           if (item?.product?.isSold === true) {
             return givenSoldOut();
+          }
+          if (item?.isStatus === false) {
+            return givenRejected();
           }
           return givenOffered();
         default:
