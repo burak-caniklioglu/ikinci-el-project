@@ -13,7 +13,9 @@ import './product-detail.scss';
 function ProductDetail() {
   const location = window.location.pathname;
   const productId = location.split('/')[2];
-  const { product, setProduct, products, setProducts } = useProduct();
+  const {
+    product, setProduct, products, setProducts,
+  } = useProduct();
   const [displayConfirmModal, setDisplayConfirmModal] = useState(false);
   const [displayOfferModal, setDisplayOfferModal] = useState(false);
   console.log(product);
@@ -40,7 +42,6 @@ function ProductDetail() {
     });
     setProduct({ ...product, isSold: true, isOfferable: false });
     setProducts([...products, product]);
-    closeModal();
   };
 
   const {
