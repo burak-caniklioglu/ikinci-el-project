@@ -2,15 +2,10 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import propTypes from 'prop-types';
 // import Cookies from 'js-cookie';
-import sendOffer from '../../api/sendOffer';
-import { useProduct } from '../../contexts/ProductContext';
 import './confirm-modal.scss';
 
-function ConfirmModal({ displayModal, closeModal }) {
+function ConfirmModal({ displayModal, closeModal, callback }) {
   // const myID = Cookies.get('myId');
-  const {
-    product, products, setProduct, setProducts,
-  } = useProduct();
   useEffect(() => {
     const closeEscapeKey = (e) => {
       if (displayModal) {
@@ -25,16 +20,6 @@ function ConfirmModal({ displayModal, closeModal }) {
     };
   }, [displayModal, closeModal]);
 
-  const handlePurchase = async () => {
-    await sendOffer.put(`/products/${product.id}`, {
-      isSold: true,
-      isOfferable: false,
-      // users_permissions_user: myID,
-    });
-    setProduct({ ...product, isSold: true, isOfferable: false });
-    setProducts([...products, product]);
-    closeModal();
-  };
   return ReactDOM.createPortal(
     <div className={displayModal ? 'confirm-modal' : 'off-confirm-modal'}>
       <div className="confirm-modal-info">
@@ -56,7 +41,8 @@ function ConfirmModal({ displayModal, closeModal }) {
             type="button"
             className="btn confirm"
             onClick={() => {
-              handlePurchase();
+              callback();
+              closeModal();
             }}
           >
             Satın Al
@@ -71,6 +57,7 @@ function ConfirmModal({ displayModal, closeModal }) {
 ConfirmModal.propTypes = {
   showModal: propTypes.bool,
   closeModal: propTypes.func,
+  callback: propTypes.func,
 };
 
 export default ConfirmModal;

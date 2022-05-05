@@ -1,30 +1,23 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-import { useProduct } from '../../contexts/ProductContext';
+// import Cookies from 'js-cookie';
 import sendOffer from '../../api/sendOffer';
 import ConfirmModal from '../ConfirmModal';
 
 function OfferListInfo({ type, item }) {
-  // const typeChange = type === 'receivedOffers';
   const [displayModal, setDisplayModal] = useState(false);
-  const {
-    product, products, setProduct, setProducts,
-  } = useProduct();
-
-  const handlePurchase = async () => {
-    await sendOffer.put(`/products/${product.id}`, {
-      isSold: true,
-      isOfferable: false,
-      // users_permissions_user: myID,
-    });
-    setProduct({ ...product, isSold: true, isOfferable: false });
-    setProducts([...products, product]);
-  };
+  // const myID = Cookies.get('myId');
 
   const givenOffered = () => (
     <p className="text-offered">Satıcıdan bilgi bekleniyor</p>
   );
 
+  const handlePurchase = async (ite) => {
+    await sendOffer.put(`/products/${ite.product.id}`, {
+      isSold: true,
+      isOfferable: false,
+    });
+  };
   const givenAccepted = () => (
     <>
       <button
@@ -38,9 +31,9 @@ function OfferListInfo({ type, item }) {
       </button>
       <p className="text-confirm">Onaylandı</p>
       <ConfirmModal
-        showModal={displayModal}
+        displayModal={displayModal}
         closeModal={() => setDisplayModal(false)}
-        callback={handlePurchase}
+        callback={() => handlePurchase(item)}
       />
     </>
   );
@@ -49,19 +42,18 @@ function OfferListInfo({ type, item }) {
   const givenPurchased = () => <p className="text-purchased">Satın alındı</p>;
   const givenSoldOut = () => <p className="text-soldout">Ürün satıldı</p>;
 
-  const putAcceptOffer = async () => {
-    await sendOffer.put(`/offers/${item.id}`, {
-      status: 'accepted',
-    });
-    setProduct({ ...product, isSold: true, isOfferable: false });
-    setProducts([...products, product]);
+  const putAcceptOffer = async (highOffer) => {
+    await sendOffer.put(`/offers/${highOffer.id}`, {
+      isStatus: true,
+    }).then(await sendOffer.put(`/products/${highOffer.product.id}`, {
+      isOfferable: false,
+    }));
   };
-  const postRejectOffer = async () => {
-    await sendOffer.put(`/offers/${item.id}`, {
-      status: 'rejected',
+
+  const postRejectOffer = async (highOffer) => {
+    await sendOffer.put(`/offers/${highOffer.id}`, {
+      isStatus: false,
     });
-    setProduct({ ...product, isSold: false, isOfferable: true });
-    setProducts([...products, product]);
   };
   const receivedOffered = () => (
     <>
@@ -69,7 +61,7 @@ function OfferListInfo({ type, item }) {
         type="button"
         className="btn-accept"
         onClick={() => {
-          putAcceptOffer(item.id);
+          putAcceptOffer(item.offers.sort((a, b) => b.offerPrice - a.offerPrice)[0]);
         }}
       >
         Onayla
@@ -78,7 +70,7 @@ function OfferListInfo({ type, item }) {
         type="button"
         className="btn-reject"
         onClick={() => {
-          postRejectOffer(item.id);
+          postRejectOffer(item.offers.sort((a, b) => b.offerPrice - a.offerPrice)[0]);
         }}
       >
         Reddet
@@ -87,18 +79,20 @@ function OfferListInfo({ type, item }) {
   );
 
   const receivedRejected = () => <p className="text-rejected">Reddedildi</p>;
-  const receivedAccepted = () => <p className="text-confirm">Onaylandı</p>;
+  const receivedAccepted = () => <p className="text-confirm">Teklif onaylandın, Alıcıdan cevap bekleniyor.</p>;
   const receivedPurchased = () => <p className="text-purchased">Satıldı</p>;
+
+  console.log(item?.product?.isSold);
   switch (type) {
     case 'givenOffers':
-      switch (item.status) {
-        case 'accepted':
-          if (item.isSold === 'true') {
+      switch (item?.isStatus === true) {
+        case true:
+          if (item?.product?.isSold === true) {
             return givenPurchased();
           }
           return givenAccepted();
-        case 'offered':
-          if (item.isSold === 'true') {
+        case false:
+          if (item?.product?.isSold === true) {
             return givenSoldOut();
           }
           return givenOffered();
@@ -108,18 +102,22 @@ function OfferListInfo({ type, item }) {
 
     case 'receivedOffers':
       if (item.isSold) {
-        if (item.status === 'accepted') {
-          return receivedPurchased();
-        }
-        return receivedRejected();
+        return receivedPurchased();
       }
-      switch (item.status) {
-        case 'accepted':
-          return receivedAccepted();
-        case 'rejected':
-          return receivedRejected();
-        default:
+
+      switch (item.offers.sort((a, b) => b.offerPrice - a.offerPrice)[0]?.isStatus === null) {
+        case true:
           return receivedOffered();
+        case false:
+          if (item.offers.sort((a, b) => b.offerPrice - a.offerPrice)[0]?.isStatus === false) {
+            return receivedRejected();
+          }
+          if (item.offers.sort((a, b) => b.offerPrice - a.offerPrice)[0]?.isStatus === true) {
+            return receivedAccepted();
+          }
+          return <p className="text-rejected">Henüz teklif yok</p>;
+        default:
+          return null;
       }
     default:
       return null;

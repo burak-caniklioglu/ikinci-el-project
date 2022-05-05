@@ -52,7 +52,7 @@ function OfferListItem({ item, type }) {
           </div>
           <div className="offer__item-content-body">
             <div className="offer__item-content-detail">
-              <p className="product-title">{item?.product.name}</p>
+              <p className="product-title">{item?.product?.name}</p>
               <p className="product-offer">
                 {type === 'receivedOffers'
                   ? 'Alınan Teklif: '

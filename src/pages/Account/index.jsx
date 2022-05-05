@@ -34,14 +34,21 @@ function Account() {
   }, []);
 
   let renderList;
+  let allReceivedOffers;
+  const listOfReceivedOffers = [];
   if (selectedTab === 'receivedOffers') {
     renderList = receivedOffers;
+    allReceivedOffers = receivedOffers.map((item) => item.offers.map((offer) => offer));
+    for (let i = 0; i < allReceivedOffers.length; i += 1) {
+      for (let j = 0; j < allReceivedOffers[i].length; j += 1) {
+        listOfReceivedOffers.push(allReceivedOffers[i][j]);
+      }
+    }
   }
 
   if (selectedTab === 'givenOffers') {
     renderList = givenOffers;
   }
-
   return (
     <>
       <Navbar />

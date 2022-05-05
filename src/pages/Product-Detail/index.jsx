@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../api/axios';
+import sendOffer from '../../api/sendOffer';
 import ConfirmModal from '../../components/ConfirmModal';
 import GivenOffer from '../../components/GivenOffer';
 import Navbar from '../../components/Navbar';
@@ -12,7 +13,7 @@ import './product-detail.scss';
 function ProductDetail() {
   const location = window.location.pathname;
   const productId = location.split('/')[2];
-  const { product, setProduct } = useProduct();
+  const { product, setProduct, products, setProducts } = useProduct();
   const [displayConfirmModal, setDisplayConfirmModal] = useState(false);
   const [displayOfferModal, setDisplayOfferModal] = useState(false);
   console.log(product);
@@ -30,6 +31,17 @@ function ProductDetail() {
       isMounted = false;
     };
   }, []);
+
+  const handlePurchase = async () => {
+    await sendOffer.put(`/products/${product.id}`, {
+      isSold: true,
+      isOfferable: false,
+      // users_permissions_user: myID,
+    });
+    setProduct({ ...product, isSold: true, isOfferable: false });
+    setProducts([...products, product]);
+    closeModal();
+  };
 
   const {
     image, name, brand, color, status, price, description,
@@ -84,6 +96,7 @@ function ProductDetail() {
         <ConfirmModal
           displayModal={displayConfirmModal}
           closeModal={() => setDisplayConfirmModal(false)}
+          callback={handlePurchase}
         />
         <OfferModal
           displayModal={displayOfferModal}
