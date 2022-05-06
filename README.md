@@ -1,77 +1,51 @@
-<<<<<<< HEAD
-<div align= 'center'>
-    <img src='./src/constants/images/protein-logo-min-min.webp' />
+
+<div align='center'>
+    <div style='display:flex; justify-content:center; align-items:baseline-end; position:relative right:50%' >
+        <img src='./src/constants/images/Protein-Logo.webp' alt='protein-logo' width='50px' />
+        <img src='./src/constants/icons/handshake.svg' alt='protein-logo' width='30px' style='position:absolute;top:100px; right:50%'/>
+        <img src='./src/constants/images/Patika-Logo.webp' alt='protein-logo' width='100px' style='margin-left:60px;' />
+    </div>
+    <br/>
+    <br/>
+    <img src='./src/constants/icons/logo.svg' alt='ikinci-el-logo' width='250px' style='margin-bottom:50px;'/>
+
 </div>
-=======
-[LIVE DEMO](https://burakcnk-ikinci-el-brk.netlify.app/)
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It is the graduation project of React bootcamp, which is realized in cooperation with Protein' tech and Patika.dev.
 
-## Available Scripts
+You can access the live demo from the link here: [ <b> Live Demo</b> ](https://protein-patika-graduation-burak-caniklioglu.netlify.app/) 
 
-In the project directory, you can run:
+## Content
 
-### `npm start`
+- [About](#About)
+- [Used Packages And Modules](#used-packages-and-modules)
+- [Installation](#installation)
+- [Previews](#previews)
+- [App Performance](#app-performance)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# About
+- Second Hand Project is an e-commerce site that provides its users with the functionality to add, buy and sell products.
 
-### `npm test`
+- Users can directly purchase the products, as well as bid on the products that are open to offers, or open the products they own to offer.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- If you already have an account, you can log in or use the site by registering.
 
-### `npm run build`
+- The application is designed for web and mobile. All UI designs are responsive.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Used Packages And Modules
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> f2472b409326b815d2b0112af0e715d6ff7e373e
+- React JS
+- Context Api
+- Axios
+- Js-cookie
+- Airbnb Eslint
+- SASS
+- Formik
+- Yup
+- Ant Design Upload
+- Toastify
+- Netlify
