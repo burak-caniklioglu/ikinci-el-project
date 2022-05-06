@@ -18,10 +18,6 @@ function ImageUploader({ handlePreview, handleUpload }) {
           onChange={handleUpload}
           showUploadList={{ showRemoveIcon: false }}
           accept=".png, .jpg, .jpeg"
-          beforeUpload={(file) => {
-            const isLt2M = file.size / 1024 / 1024 < 0.4;
-            return isLt2M;
-          }}
           progress={{
             strokeWidth: 3,
             format: (percent) => `${percent}%`,

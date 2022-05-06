@@ -85,6 +85,9 @@
     .price-row{
       width:32.32%;
       position: relative;
+      @include screenSize("large") {
+        width: 80%;
+      }
       @include screenSize("medium") {
         width: 100%;
       }
@@ -98,6 +101,12 @@
       @include screenSize("medium") {
         left: 90%;
       }
+      & > span {
+        color: $_F77474 !important;
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+        padding: 0 1rem;
+      }
     }
   
     .offer-row {
@@ -107,6 +116,9 @@
       .offeropt {
         margin-right: 1rem;
         color: $_3E3E3E;
+      }
+      @include screenSize("large") {
+        width: 80%;
       }
       @include screenSize("medium") {
         width: 100%;
@@ -152,7 +164,7 @@
 }
 
 .save-btn{
-  width: 31.5rem;
+  width: 16.4vw;
   height: 4.5rem;
   border: none;
   border-radius: 0.8rem;
@@ -163,9 +175,18 @@
   margin-top: 48.4rem;
   float: right;
   @include screenSize("medium") {
-    margin-top: 010rem;
+    margin-top: 15rem;
     margin-bottom: 1rem;
     float: none;
     width: 100%;
   }
+}
+
+.not-valid {
+  border: 1px solid $_F77474 !important;
+  background-color: $_FFFFFFF !important;
+  color: $_F77474 !important;
+}
+.not-valid-ico {
+  color: $_F77474 !important;
 }

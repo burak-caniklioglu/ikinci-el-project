@@ -12,9 +12,17 @@
     .add-product-wrapper{
       max-width: calc(100vw - 24.5%);
       margin: 0 auto;
+      overflow-y: auto;
       background-color: $_FFFFFFF;
       padding: 2.8rem 3rem 3rem; 
       border-radius: 0.8rem;
+      @include screenSize("small") {
+        min-width: 90vw;
+        margin: 1rem auto;
+        padding: 1rem;
+        padding-bottom: 7rem;
+  
+      }
       .add-product {
         width: 100%;
         @include screenSize('medium') {

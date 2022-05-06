@@ -42,7 +42,8 @@
           @include display-flex(row, unset, space-between);
           width: 100%;
           @include screenSize('small') {
-            flex-direction: column;
+            
+            @include display-flex(column,unset, unset);
             height: 100%;
           }
         }
@@ -50,6 +51,7 @@
           @include display-flex(column, flex-start, space-around);
           margin-left: 1rem;
           height: 100%;
+
           .product-title {
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
@@ -64,8 +66,11 @@
             font-size: 1.5rem;
             color: $_B1B1B1;
             width: 23rem;
+            @include screenSize('large') {
+              width: 100%;
+            }
             @include screenSize('small') {
-              max-width: 30rem;
+              width: 100%;
             }
   
             .offer-price {
@@ -96,13 +101,22 @@
         .btn-accept {
           background-color: $_4B9CE2;
           margin-right: 1.1rem;
+          @include screenSize('small') {
+            min-width: 50%;
+          }
         }
         .btn-reject {
           background-color: $_F77474;
+          @include screenSize('small') {
+            width: 50%;
+          }
         }
         .text-confirm {
           color: $_4B9CE2;
           width: 100%;
+          @include screenSize('small') {
+            margin-left: 10%;
+          }
         }
         .text-offered {
           color: $_4B9CE2;

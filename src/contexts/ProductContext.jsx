@@ -30,12 +30,13 @@ function ProductProvider({ children }) {
     setProducts(response.data);
   };
 
-  const myID = Cookies.get('myId');
   const handleGivenOffers = async () => {
+    const myID = Cookies.get('myId');
     const response = await sendOffer.get(`/offers?users_permissions_user=${myID}`);
     setGivenOffers(response.data);
   };
   const handleReceivedOffers = async () => {
+    const myID = Cookies.get('myId');
     const response = await sendOffer.get(`/products?users_permissions_user=${myID}`);
     setReceivedOffers(response.data);
   };

@@ -68,7 +68,7 @@ function AddProductForm() {
         brand: '',
         color: '',
         status: '',
-        price: '',
+        price: null,
         isSold: false,
         isOfferable: false,
         users_permissions_user: myID,
@@ -171,12 +171,12 @@ function AddProductForm() {
                   id="price"
                   className={errors?.price ? 'not-valid' : 'price'}
                   placeholder="Bir fiyat girin"
-                  value={Number(values.price)}
+                  value={values.price}
                   onChange={handleChange}
                 />
                 <p className={errors?.price ? 'not-valid-ico' : ''}>TL</p>
                 {errors?.price && (
-                <span>Lütfen geçerli bir tutar giriniz. (Örnek: 123.45)</span>
+                <span>0-9 Arasında Bir Rakam Girin </span>
                 )}
               </div>
               <div className="form-row offer-row">

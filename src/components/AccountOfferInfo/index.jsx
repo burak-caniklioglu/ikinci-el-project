@@ -3,19 +3,25 @@ import propTypes from 'prop-types';
 // import Cookies from 'js-cookie';
 import sendOffer from '../../api/sendOffer';
 import ConfirmModal from '../ConfirmModal';
+import { useProduct } from '../../contexts/ProductContext';
+// import axios from '../../api/axios';
 
 function OfferListInfo({ type, item }) {
   const [displayModal, setDisplayModal] = useState(false);
+  const { handleReceivedOffers, handleGivenOffers } = useProduct();
 
   const givenOffered = () => (
     <p className="text-offered">Satıcıdan bilgi bekleniyor</p>
   );
 
   const handlePurchase = async (ite) => {
-    await sendOffer.put(`/products/${ite.product.id}`, {
+    await sendOffer.put(`/products/${ite?.product?.id}`, {
       isSold: true,
       isOfferable: false,
     });
+
+    handleGivenOffers();
+    handleReceivedOffers();
   };
   const givenAccepted = () => (
     <>
@@ -44,9 +50,11 @@ function OfferListInfo({ type, item }) {
   const putAcceptOffer = async (highOffer) => {
     await sendOffer.put(`/offers/${highOffer.id}`, {
       isStatus: true,
-    }).then(await sendOffer.put(`/products/${highOffer.product.id}`, {
+    }).then(await sendOffer.put(`/products/${highOffer.product}`, {
       isOfferable: false,
     }));
+    handleReceivedOffers();
+    handleGivenOffers();
   };
 
   const postRejectOffer = async (highOffer) => {
@@ -78,7 +86,7 @@ function OfferListInfo({ type, item }) {
   );
 
   const receivedRejected = () => <p className="text-rejected">Reddedildi</p>;
-  const receivedAccepted = () => <p className="text-confirm">Teklif onaylandın, Alıcıdan cevap bekleniyor.</p>;
+  const receivedAccepted = () => <p className="text-confirm">Onayladın.</p>;
   const receivedPurchased = () => <p className="text-purchased">Satıldı</p>;
 
   switch (type) {
