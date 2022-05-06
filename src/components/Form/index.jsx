@@ -112,8 +112,8 @@ function Form() {
               toastify('error', 'Email adresi geçersiz');
               setErr(errors);
             } else if (values.password.length < 6) {
-              errors.password = 'Password must be at least 6 characters';
-              toastify('error', 'Şifre en az 6 karakter olmalı');
+              errors.password = 'Password must be at least 8 characters';
+              toastify('error', 'Şifre en az 8 karakter olmalı');
               setErr(errors);
             } else { submitHandler(values); }
           }}
@@ -127,7 +127,7 @@ function Form() {
             <form onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email">
-                  E-posta
+                  E-mail
                   <input
                     className={`${err.email ? 'error' : ''}`}
                     type="email"
@@ -150,7 +150,7 @@ function Form() {
                     type="password"
                     id="password"
                     name="password"
-                    placeholder="......"
+                    placeholder="........"
                     autoComplete="off"
                     value={values.password}
                     onChange={handleChange}

@@ -13,6 +13,9 @@
     padding-top: 2rem;
     max-width: 1480px;
     margin: 0 auto;
+    @include screenSize("xxlarge") {
+      max-width: 1200px;
+    }
     @include screenSize("medium") {
       max-width: calc(100vw - 2rem);
       padding-top: 1rem;

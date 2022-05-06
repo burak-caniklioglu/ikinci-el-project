@@ -12,6 +12,11 @@
   .account-wrapper {
     max-width: calc(100vw - 24.5%);
     margin: 0 auto;
+    @include screenSize("small") {
+      min-width: 90vw;
+      margin: 1rem auto;
+
+    }
     
 
     .account-info {

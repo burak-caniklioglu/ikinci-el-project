@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import propTypes from 'prop-types';
+import toastify from '../../helper funcs/toastify';
 // import Cookies from 'js-cookie';
 import './confirm-modal.scss';
 
@@ -33,7 +34,9 @@ function ConfirmModal({ displayModal, closeModal, callback }) {
           <button
             type="button"
             className="btn cancel"
-            onClick={() => closeModal()}
+            onClick={() => {
+              closeModal();
+            }}
           >
             Vazgeç
           </button>
@@ -43,6 +46,7 @@ function ConfirmModal({ displayModal, closeModal, callback }) {
             onClick={() => {
               callback();
               closeModal();
+              toastify('success', 'Satın alındı');
             }}
           >
             Satın Al

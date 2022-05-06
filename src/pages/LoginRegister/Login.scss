@@ -5,7 +5,10 @@
     background-color: $_FBFBFB;
     @include display-flex(row,center);
     overflow-y: hidden;
-    
+    @include screenSize('medium') {
+      background-color: $_F2F2F2;
+      
+    }
     
 
     .login-register-banner {
@@ -14,6 +17,7 @@
   
       @include screenSize('medium') {
         display: none;
+
       }
   
       img {
@@ -33,6 +37,9 @@
       }
       .login-register-logo{
         margin-top: 10.3vh;
+        @include screenSize('medium') {
+          margin-top: 2%; 
+        }
       }
 
       

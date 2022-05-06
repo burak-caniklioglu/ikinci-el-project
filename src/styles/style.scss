@@ -43,6 +43,11 @@ button {
       width: 96vw;
       margin: 0px 2vw;
     }
+    @include screenSize('small') {
+      top: 1rem !important;
+      width: 96vw;
+      margin: 0px 2vw;
+    }
   }
   
   .error.toast{

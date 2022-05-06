@@ -23,7 +23,7 @@ function Account() {
     return () => {
       mounted = false;
     };
-  }, [givenOffers, receivedOffers]);
+  }, []);
 
   let renderList;
   let allReceivedOffers;

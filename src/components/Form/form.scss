@@ -16,16 +16,27 @@
   @include screenSize('medium') {
     max-width: 70vw;
   }
-
+  @include screenSize('small') {
+    margin:2.4rem 1rem 1rem 1rem;
+    min-width: 90vw;
+  }
   .form-header{
     width: 68.36%;
     margin: 0 auto;
     text-align: center;
     color: $_525252;
+    @include screenSize('medium') {
+      min-width: 90%;
+      
+    margin:3rem 2rem;
+      }
     h1{
       font-size: 3.2rem;
       font-weight: bold;
       margin-top: 7.47vh;
+      @include screenSize('medium') {
+      margin-top: 3.33vh;
+      }
     }
     .form-header-desc{
       font-size: 1.5rem;
@@ -46,6 +57,7 @@
             top: 65%;
           }
           input[type="email"] {
+            padding-left: 1rem;
             margin-top: 0.5rem;
             width: 100%;
             height: 4.5rem;
@@ -53,13 +65,11 @@
             border: none;
             outline: none;
             background-color: $_F4F4F4;
-            &::placeholder{
-              padding-left: 1rem;
-            }
             
           }
           input[type="password"]{
             margin-top: 0.5rem;
+            padding-left: 1rem;
             width: 100%;
             height: 4.5rem;
             border-radius: 8px;
@@ -69,7 +79,6 @@
             &::placeholder{
               font-size: 3rem;
               letter-spacing: 0.2rem;
-              padding-left: 1rem;
             }
           }
           input.error {
@@ -107,14 +116,20 @@
         font-size: 1.8rem;
         margin-top: 2vh;
         margin-bottom: 2vh;
+        @include screenSize('medium') {
+          margin: 3rem auto;
+          }
         &:hover{
-          background-color: #000;
+          background-color: $_525252;
           color: #fff;
         }
       }
       .account-query{
         font-size: 1.5rem;
         margin-bottom: 7vh;
+        @include screenSize('medium') {
+          margin-bottom: 3rem;
+          }
         span{
           color: $_4B9CE2;
         }
