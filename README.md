@@ -3,8 +3,8 @@
 <div align='center'>
     <div>
         <img src='./src/constants/images/Protein-Logo.webp' alt='protein-logo' width='50px' />
-        <img src='./src/constants/icons/handshake.svg' alt='handshake' width='30px' class='handshake' />
-        <img src='./src/constants/images/Patika-Logo.webp' alt='patika-logo' width='100px' class='patika' />
+        <img src='./src/constants/icons/handshake.svg' alt='handshake' width='30px'  />
+        <img src='./src/constants/images/Patika-Logo.webp' alt='patika-logo' width='100px'  />
     </div>
     <br/>
     <br/>
@@ -13,6 +13,7 @@
 
 </div>
 
+<br/>
 <br/>
 
 It is the graduation project of React bootcamp, which is realized in cooperation with Protein' tech and Patika.dev.
@@ -53,3 +54,26 @@ You can access the live demo from the link here: [ <b> Live Demo</b> ](https://p
 - Ant Design Upload
 - Toastify
 - Netlify
+
+<br>
+
+## Installation
+
+- First, clone the project:
+
+```
+git clone https://github.com/burak-caniklioglu/ikinci-el-project.git
+```
+
+- Then, start the project on localhost:
+
+```
+# install dependencies with npm
+npm install
+# or install dependencies with yarn
+yarn
+
+# serve at localhost:3000
+npm start or yarn start
+```
+
