@@ -1,15 +1,35 @@
+<style>
+.logos {
+    display:flex;
+    justify-content:center;
+    align-items:baseline-end;
+    position:relative;
+}
+.handshake{
+    position:absolute;
+    top:80px;
+    inset:1;
+}
+.patika{
+    margin-left:90px;
+}
+
+</style>
 
 <div align='center'>
-    <div style='display:flex; justify-content:center; align-items:baseline-end; position:relative right:50%' >
+    <div class='logos' >
         <img src='./src/constants/images/Protein-Logo.webp' alt='protein-logo' width='50px' />
-        <img src='./src/constants/icons/handshake.svg' alt='protein-logo' width='30px' style='position:absolute;top:100px; right:50%'/>
-        <img src='./src/constants/images/Patika-Logo.webp' alt='protein-logo' width='100px' style='margin-left:60px;' />
+        <img src='./src/constants/icons/handshake.svg' alt='handshake' width='30px' class='handshake' />
+        <img src='./src/constants/images/Patika-Logo.webp' alt='patika-logo' width='100px' class='patika' />
     </div>
     <br/>
     <br/>
-    <img src='./src/constants/icons/logo.svg' alt='ikinci-el-logo' width='250px' style='margin-bottom:50px;'/>
+    <img src='./src/constants/icons/logo.svg' alt='ikinci-el-logo' width='250px' />
+
 
 </div>
+
+<br/>
 
 It is the graduation project of React bootcamp, which is realized in cooperation with Protein' tech and Patika.dev.
 
