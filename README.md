@@ -1,23 +1,7 @@
-<style>
-.logos {
-    display:flex;
-    justify-content:center;
-    align-items:baseline-end;
-    position:relative;
-}
-.handshake{
-    position:absolute;
-    top:80px;
-    inset:1;
-}
-.patika{
-    margin-left:90px;
-}
 
-</style>
 
 <div align='center'>
-    <div class='logos' >
+    <div>
         <img src='./src/constants/images/Protein-Logo.webp' alt='protein-logo' width='50px' />
         <img src='./src/constants/icons/handshake.svg' alt='handshake' width='30px' class='handshake' />
         <img src='./src/constants/images/Patika-Logo.webp' alt='patika-logo' width='100px' class='patika' />
@@ -37,7 +21,7 @@ You can access the live demo from the link here: [ <b> Live Demo</b> ](https://p
 
 ## Content
 
-- [About](#About)
+- [About](#about)
 - [Used Packages And Modules](#used-packages-and-modules)
 - [Installation](#installation)
 - [Previews](#previews)
