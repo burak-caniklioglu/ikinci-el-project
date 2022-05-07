@@ -30,7 +30,6 @@ function Navbar() {
             <button
               type="button"
               className="nav-btn btn-add-product"
-              onClick={() => handleGivenOffers() && handleReceivedOffers()}
             >
               <Plus />
               {' '}
@@ -42,7 +41,14 @@ function Navbar() {
           ) }
           {isAuth ? (
             <Link to="/myaccount">
-              <button type="button" className="nav-btn btn-add-product">
+              <button
+                type="button"
+                className="nav-btn btn-add-product"
+                onClick={() => {
+                  handleGivenOffers();
+                  handleReceivedOffers();
+                }}
+              >
                 <Login />
                 {' '}
                 Hesabım
