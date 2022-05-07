@@ -13,7 +13,7 @@ function OfferListItem({ item, type }) {
         <div className="offer__item-wrapper">
           <div className="offer__item-content">
             <div className="offer__item-content-img" role="none" onClick={() => moreClick(item)}>
-              <img src={item?.image === 'null' ? UndefinedProduct : `https://bootcamp.akbolat.net${item?.image?.formats.thumbnail?.url}`} alt="product-img" />
+              <img src={item?.image === 'null' ? UndefinedProduct : `https://bootcamp.akbolat.net${item?.image?.formats?.thumbnail?.url}`} alt="product-img" />
             </div>
             <div className="offer__item-content-body">
               <div className="offer__item-content-detail">
@@ -48,7 +48,7 @@ function OfferListItem({ item, type }) {
       <div className="offer__item-wrapper">
         <div className="offer__item-content">
           <div className="offer__item-content-img" role="none" onClick={() => moreClick(item?.product)}>
-            <img src={item?.product?.image === null ? UndefinedProduct : `https://bootcamp.akbolat.net${item?.product?.image?.formats.thumbnail?.url}`} alt="product-img" />
+            <img src={item?.product?.image === null ? UndefinedProduct : `https://bootcamp.akbolat.net${item?.product?.image?.formats?.thumbnail?.url}`} alt="product-img" />
           </div>
           <div className="offer__item-content-body">
             <div className="offer__item-content-detail">
