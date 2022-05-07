@@ -73,7 +73,9 @@ function ProductProvider({ children }) {
             },
           },
         );
-        setGivenOffers(response.data);
+        const newGivenOffers = response.data.filter((item) => item.product !== null);
+
+        setGivenOffers(newGivenOffers);
       }
     } catch (error) {
       console.log(error);

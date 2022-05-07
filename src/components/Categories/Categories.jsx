@@ -23,9 +23,9 @@ function Categories() {
 
   return (
     <section className="category-container">
-      <ul className="category-area">
+      <div className="category-area">
         {customCategories?.map((item) => (
-          <li key={item.id} role="none" onClick={() => setSearchParams({ category: item.name })}>
+          <div key={item.id} role="none" onClick={() => setSearchParams({ category: item.name })}>
             <div
               role="none"
               onClick={() => setActiveCategory(item?.name)}
@@ -37,9 +37,9 @@ function Categories() {
             >
               {item?.name.trim()}
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
