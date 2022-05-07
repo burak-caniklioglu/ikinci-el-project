@@ -81,3 +81,43 @@ yarn
 npm start or yarn start
 ```
 
+# Previews
+
+<center>
+
+## Web - Login Page
+
+<img src='previews/login-page.webp' />
+
+## Web - Register Page
+
+<img src='previews/register-page.webp' />
+
+## Web - Main Page
+
+<img src='previews/main-page.webp' />
+
+## Web - Detail Page
+
+<img src='previews/detail-page.webp' />
+
+## Web - Add Product Page
+
+<img src='previews/add-product-page.webp' />
+
+## Web - Account Page
+
+<img src='previews/account-page.webp' />
+
+
+## Mobile
+
+<p align="center">
+    <img src="previews/login-mobile.webp" alt="mobile-prew" width="220"/>
+    <img src="previews/register-mobile.webp" alt="mobile-prew" width="220"/>
+    <img src="previews/main-mobile.webp" alt="mobile-prew" width="220"/>
+    <img src="previews/detay-mobile.webp" alt="mobile-prew" width="220"/>
+    <img src="previews/addProduct-mobile.webp" alt="mobile-prew" width="220"/>
+    <img src="previews/account-mobile.webp" alt="mobile-prew" width="220"/>
+</p>
+</center>
