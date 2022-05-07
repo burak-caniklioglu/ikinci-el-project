@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import ProfilePicture from '../../constants/icons/ProfilePicture';
 import OfferTabs from '../../components/AccountOfferTabs';
@@ -13,6 +14,7 @@ function Account() {
   const {
     givenOffers, handleGivenOffers, receivedOffers, handleReceivedOffers,
   } = useProduct();
+  const navigate = useNavigate();
 
   useEffect(() => {
     handleGivenOffers();
@@ -42,10 +44,26 @@ function Account() {
         <div className="account-wrapper">
           <div className="account-info">
             <div className="account-info-wrapper">
-              <figure>
-                <ProfilePicture />
-              </figure>
-              <p>{email}</p>
+
+              <div className="profile-wrapper">
+                <figure>
+                  <ProfilePicture />
+                </figure>
+                <p>{email}</p>
+
+              </div>
+              <button
+                type="button"
+                className="btn-logout"
+                onClick={() => {
+                  Cookies.remove('user');
+                  Cookies.remove('token');
+                  Cookies.remove('myId');
+                  navigate('/');
+                }}
+              >
+                Çıkış Yap
+              </button>
             </div>
           </div>
           <div className="account-content">

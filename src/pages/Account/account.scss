@@ -20,22 +20,38 @@
     
 
     .account-info {
-      width: 100%;
       background-color: rgba(255, 255, 255, 1);
       border-radius: 0.8rem;
 
       &-wrapper {
-        @include display-flex(row, center, flex-start);
+        @include display-flex(row, center, space-between);
+        max-width: 141rem;
+        
+        .btn-logout{
+          font-size: 1.5rem;
+          color: $_FFFFFFF;
+          width: 10.8rem;
+          height: 3rem;
+          line-height: 3rem;
+          border: none;
+          border-radius: 0.8rem;
+          background-color: $_F77474;
+        }
+
+
+        .profile-wrapper{
+          @include display-flex(row, center, flex-start);
 
         padding: 0.8rem 3rem;
-
-        p {
-          margin-left: 1rem;
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: rgba(82, 82, 82, 1);
-          background-color: rgba(255, 255, 255, 1);
+          p {
+            margin-left: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: rgba(82, 82, 82, 1);
+            background-color: rgba(255, 255, 255, 1);
+          }
         }
+        
       }
     }
 

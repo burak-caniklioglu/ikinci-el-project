@@ -111,7 +111,7 @@ function Form() {
               errors.email = 'Invalid email address';
               toastify('error', 'Email adresi geçersiz');
               setErr(errors);
-            } else if (values.password.length < 8) {
+            } else if (values.password.length < 6) {
               errors.password = 'Password must be at least 8 characters';
               toastify('error', 'Şifre en az 8 karakter olmalı');
               setErr(errors);
