@@ -121,3 +121,22 @@ npm start or yarn start
     <img src="previews/account-mobile.webp" alt="mobile-prew" width="220"/>
 </p>
 </center>
+
+<br>
+<br>
+
+# App Performance
+
+## Web
+
+<p align="center">
+
+  <img src="previews/web-performance.PNG alt="mobile-prew" width="660"/>
+</p>
+
+## Mobile
+
+<p align="center">
+
+  <img src="previews/mobile-performance.PNG" alt="mobile-prew" width="660"/>
+</p>
