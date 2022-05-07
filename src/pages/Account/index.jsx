@@ -15,14 +15,8 @@ function Account() {
   } = useProduct();
 
   useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      handleGivenOffers();
-      handleReceivedOffers();
-    }
-    return () => {
-      mounted = false;
-    };
+    handleGivenOffers();
+    handleReceivedOffers();
   }, []);
 
   let renderList;

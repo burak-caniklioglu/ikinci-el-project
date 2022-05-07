@@ -32,16 +32,38 @@ function ProductProvider({ children }) {
 
   const handleGivenOffers = async () => {
     const myID = Cookies.get('myId');
-    const response = await sendOffer.get(`/offers?users_permissions_user=${myID}`);
+    const response = await axios.get(
+      `/offers?users_permissions_user=${myID}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${Cookies?.get('token')}`,
+        },
+      },
+    );
     setGivenOffers(response.data);
   };
   const handleReceivedOffers = async () => {
     const myID = Cookies.get('myId');
-    const response = await sendOffer.get(`/products?users_permissions_user=${myID}`);
+    const response = await sendOffer.get(
+      `/products?users_permissions_user=${myID}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${Cookies?.get('token')}`,
+        },
+      },
+    );
     setReceivedOffers(response.data);
   };
   useEffect(() => {
     getProducts();
+  }, []);
+  useEffect(() => {
+    handleGivenOffers();
+    handleReceivedOffers();
   }, []);
   return (
     <ProductContext.Provider
