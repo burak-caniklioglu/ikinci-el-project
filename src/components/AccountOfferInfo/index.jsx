@@ -61,6 +61,8 @@ function OfferListInfo({ type, item }) {
     await sendOffer.put(`/offers/${highOffer.id}`, {
       isStatus: false,
     });
+    handleReceivedOffers();
+    handleGivenOffers();
   };
   const receivedOffered = () => (
     <>

@@ -36,6 +36,10 @@
           border: none;
           border-radius: 0.8rem;
           background-color: $_F77474;
+          @include screenSize("small") {
+            margin: auto;
+      
+          }
         }
 
 
