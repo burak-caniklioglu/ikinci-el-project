@@ -131,7 +131,7 @@ npm start or yarn start
 
 <p align="center">
 
-  <img src="previews/web-performance.PNG alt="mobile-prew" width="660"/>
+  <img src="previews/web-performance.PNG" alt="mobile-prew" width="660"/>
 </p>
 
 ## Mobile
