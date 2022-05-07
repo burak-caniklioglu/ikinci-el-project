@@ -10,8 +10,11 @@
   }
 
   .account-wrapper {
-    max-width: calc(100vw - 24.5%);
+    max-width: 148rem;
     margin: 0 auto;
+    @include screenSize("xxlarge") {
+      max-width: 120rem;
+    }
     @include screenSize("small") {
       min-width: 90vw;
       margin: 1rem auto;
@@ -25,7 +28,7 @@
 
       &-wrapper {
         @include display-flex(row, center, space-between);
-        max-width: 141rem;
+        max-width: 146rem;
         
         .btn-logout{
           font-size: 1.5rem;
@@ -36,8 +39,9 @@
           border: none;
           border-radius: 0.8rem;
           background-color: $_F77474;
+          margin-right: 2rem;
           @include screenSize("small") {
-            margin: auto;
+            margin-right: 1rem;
       
           }
         }
@@ -64,7 +68,7 @@
       background-color: rgba(255, 255, 255, 1);
       border-radius: 0.8rem;
       margin-top: 1rem;
-
+      
       .offer-list {
         margin-top: 1.5rem;
         padding: 0 3rem;

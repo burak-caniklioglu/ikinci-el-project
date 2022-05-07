@@ -3,6 +3,7 @@ import axios from '../../api/axios';
 import sendOffer from '../../api/sendOffer';
 import ConfirmModal from '../../components/ConfirmModal';
 import GivenOffer from '../../components/GivenOffer';
+import Loading from '../../components/Loading';
 import Navbar from '../../components/Navbar';
 import OfferModal from '../../components/OfferModal';
 import ProductDetailButtons from '../../components/ProductDetailButtons';
@@ -14,7 +15,7 @@ function ProductDetail() {
   const location = window.location.pathname;
   const productId = location.split('/')[2];
   const {
-    product, setProduct, products, setProducts,
+    product, setProduct, products, setProducts, isLoading,
   } = useProduct();
   const [displayConfirmModal, setDisplayConfirmModal] = useState(false);
   const [displayOfferModal, setDisplayOfferModal] = useState(false);
@@ -53,6 +54,7 @@ function ProductDetail() {
       <div>
         <Navbar />
         <main className="product-detail-container">
+          <section>{isLoading && <Loading />}</section>
           <div className="product-detail-wrapper">
             <div className="product-detail">
               <figure className="product-detail-img">

@@ -13,13 +13,16 @@
     min-height: 120vh;
   }
   .product-detail-wrapper {
-    max-width: calc(100vw - 23%);
+    max-width: 148rem;
     margin: 0 auto;
     
     overflow-y: auto;
     background-color: $_FFFFFFF;
     padding: 1.5rem 1.6rem;
     border-radius: 0.8rem;
+    @include screenSize("xxlarge") {
+      max-width: 120rem;
+    }
     @include screenSize("small") {
       min-width: 90vw;
       margin: 1rem auto;
@@ -52,7 +55,7 @@
     width: 53%;
     padding: 1rem 6rem;
     color: $_525252;
-    font-size: 0.78vw;
+    font-size: 1.5rem;
     @include screenSize("medium") {
       @include display-flex(column, unset, unset);
       padding: 0.6rem;
@@ -64,7 +67,7 @@
     }
 
     .content-title {
-      font-size: 1.77vw;
+      font-size: 3.2rem;
       font-weight: 500;
       margin-bottom: 2.5rem;
       color: $_555555;

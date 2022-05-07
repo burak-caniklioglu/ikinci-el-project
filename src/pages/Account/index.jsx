@@ -7,12 +7,13 @@ import OfferTabs from '../../components/AccountOfferTabs';
 import OfferListItem from '../../components/AccountOfferList-Item';
 import './account.scss';
 import { useProduct } from '../../contexts/ProductContext';
+import Loading from '../../components/Loading';
 
 function Account() {
   const email = Cookies.get('user');
   const [selectedTab, setSelectedTab] = useState('receivedOffers');
   const {
-    givenOffers, handleGivenOffers, receivedOffers, handleReceivedOffers,
+    givenOffers, handleGivenOffers, receivedOffers, handleReceivedOffers, isLoading,
   } = useProduct();
   const navigate = useNavigate();
 
@@ -41,6 +42,7 @@ function Account() {
     <>
       <Navbar />
       <div className="account-container">
+        <section>{isLoading && <Loading />}</section>
         <div className="account-wrapper">
           <div className="account-info">
             <div className="account-info-wrapper">

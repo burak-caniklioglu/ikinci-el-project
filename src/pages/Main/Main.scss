@@ -14,7 +14,7 @@
     max-width: 1480px;
     margin: 0 auto;
     @include screenSize("xxlarge") {
-      max-width: 1200px;
+      max-width: 120rem;
     }
     @include screenSize("medium") {
       max-width: calc(100vw - 2rem);

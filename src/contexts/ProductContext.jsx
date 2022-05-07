@@ -18,45 +18,98 @@ function ProductProvider({ children }) {
   const [product, setProduct] = useState({});
   const [givenOffers, setGivenOffers] = useState([]);
   const [receivedOffers, setReceivedOffers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const moreClick = (item) => {
-    navigate(`/productdetail/${item?.id}`);
-    setProduct(item);
+    setIsLoading(true);
+    let mounted = true;
+    try {
+      if (mounted) {
+        navigate(`/productdetail/${item?.id}`);
+        setProduct(item);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+    return () => {
+      mounted = false;
+    };
   };
 
   const getProducts = async () => {
-    const response = await axios.get('/products');
-    setProducts(response.data);
+    setIsLoading(true);
+    let mounted = true;
+    try {
+      if (mounted) {
+        const response = await axios.get('/products');
+        setProducts(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+    return () => {
+      mounted = false;
+    };
   };
 
   const handleGivenOffers = async () => {
-    const myID = Cookies.get('myId');
-    const response = await axios.get(
-      `/offers?users_permissions_user=${myID}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${Cookies?.get('token')}`,
-        },
-      },
-    );
-    setGivenOffers(response.data);
+    setIsLoading(true);
+    let mounted = true;
+    try {
+      if (mounted) {
+        const myID = Cookies.get('myId');
+        const response = await axios.get(
+          `/offers?users_permissions_user=${myID}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+              Authorization: `Bearer ${Cookies?.get('token')}`,
+            },
+          },
+        );
+        setGivenOffers(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+    return () => {
+      mounted = false;
+    };
   };
   const handleReceivedOffers = async () => {
-    const myID = Cookies.get('myId');
-    const response = await sendOffer.get(
-      `/products?users_permissions_user=${myID}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${Cookies?.get('token')}`,
-        },
-      },
-    );
-    setReceivedOffers(response.data);
+    setIsLoading(true);
+    let mounted = true;
+    try {
+      if (mounted) {
+        const myID = Cookies.get('myId');
+        const response = await sendOffer.get(
+          `/products?users_permissions_user=${myID}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+              Authorization: `Bearer ${Cookies?.get('token')}`,
+            },
+          },
+        );
+        setReceivedOffers(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+    return () => {
+      mounted = false;
+    };
   };
   useEffect(() => {
     getProducts();
@@ -90,6 +143,8 @@ function ProductProvider({ children }) {
         setReceivedOffers,
         handleGivenOffers,
         handleReceivedOffers,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
