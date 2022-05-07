@@ -26,7 +26,7 @@ function AddProductForm() {
   const [previewImage, setPreviewImage] = useState('');
   const [previewVisible, setPreviewVisible] = useState(false);
   const [fileList, setFileList] = useState([]);
-  const { setProducts } = useProduct();
+  const { setProducts, setIsLoading } = useProduct();
   const myID = Cookies.get('myId');
   const navigate = useNavigate();
 
@@ -40,23 +40,28 @@ function AddProductForm() {
   };
 
   const submitHandler = async (productData) => {
+    setIsLoading(true);
     let mounted = true;
-    if (mounted) {
-      const formData = new FormData();
-      formData.append('data', JSON.stringify(productData));
-      if (fileList.length > 0 || fileList[0].size < 400000) {
-        formData.append('files.image', fileList[0].originFileObj);
-      } else {
-        return;
+    try {
+      if (mounted) {
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(productData));
+        if (fileList.length > 0 || fileList[0].size < 400000) {
+          formData.append('files.image', fileList[0].originFileObj);
+        } else {
+          return;
+        }
+        const response = await sendOffer.post('/products', formData);
+        setFileList([]);
+        const newProducts = await axios('/products');
+        setProducts(newProducts.data);
+        navigate('/myaccount');
+        mounted = false;
       }
-      const response = await sendOffer.post('/products', formData)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-      mounted = false;
-      setFileList([]);
-      const newProducts = await axios('/products');
-      setProducts(newProducts.data);
-      navigate('/myaccount');
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (

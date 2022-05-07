@@ -15,7 +15,7 @@ function ProductDetail() {
   const location = window.location.pathname;
   const productId = location.split('/')[2];
   const {
-    product, setProduct, products, setProducts, isLoading,
+    product, setProduct, products, setProducts, setIsLoading, isLoading,
   } = useProduct();
   const [displayConfirmModal, setDisplayConfirmModal] = useState(false);
   const [displayOfferModal, setDisplayOfferModal] = useState(false);
@@ -36,13 +36,26 @@ function ProductDetail() {
   }, []);
 
   const handlePurchase = async () => {
-    await sendOffer.put(`/products/${product.id}`, {
-      isSold: true,
-      isOfferable: false,
-      // users_permissions_user: myID,
-    });
-    setProduct({ ...product, isSold: true, isOfferable: false });
-    setProducts([...products, product]);
+    setIsLoading(true);
+    let mounted = true;
+    try {
+      if (mounted) {
+        await sendOffer.put(`/products/${product.id}`, {
+          isSold: true,
+          isOfferable: false,
+          // users_permissions_user: myID,
+        });
+        setProduct({ ...product, isSold: true, isOfferable: false });
+        setProducts([...products, product]);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+    return () => {
+      mounted = false;
+    };
   };
 
   const {

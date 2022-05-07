@@ -30,7 +30,6 @@ function Form() {
           password: values.password,
         });
         const { jwt } = await response.data;
-        console.log(response);
         Cookies.set('myId', response.data.user.id);
         Cookies.set('token', jwt);
         Cookies.set('user', response.data.user.email);
@@ -54,9 +53,7 @@ function Form() {
             identifier: values.email,
             password: values.password,
           });
-          const data = await response;
           const { jwt } = await response.data;
-          console.log(data);
           Cookies.set('myId', response.data.user.id);
           Cookies.set('token', jwt);
           Cookies.set('user', response.data.user.email);

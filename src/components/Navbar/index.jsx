@@ -6,10 +6,12 @@ import Logo from '../../constants/icons/Logo';
 import Plus from '../../constants/icons/Plus';
 import Login from '../../constants/icons/Login';
 import useWindowSize from '../../hooks/useWindowSize';
+import { useProduct } from '../../contexts/ProductContext';
 
 function Navbar() {
   const [width] = useWindowSize();
   const isAuth = Cookies.get('token');
+  const { getProduct } = useProduct();
 
   return (
     <nav className="nav">
@@ -18,6 +20,7 @@ function Navbar() {
           <Link to="/">
             <Logo
               size={width < 768 ? 99.33 : 128.94}
+              onClick={() => getProduct}
             />
           </Link>
         </div>

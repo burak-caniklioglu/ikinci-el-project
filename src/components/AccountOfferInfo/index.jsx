@@ -8,7 +8,7 @@ import { useProduct } from '../../contexts/ProductContext';
 
 function OfferListInfo({ type, item }) {
   const [displayModal, setDisplayModal] = useState(false);
-  const { handleReceivedOffers, handleGivenOffers } = useProduct();
+  const { handleReceivedOffers, handleGivenOffers, setIsLoading } = useProduct();
 
   const givenOffered = () => (
     <p className="text-offered">Satıcıdan bilgi bekleniyor</p>
@@ -48,21 +48,47 @@ function OfferListInfo({ type, item }) {
   const givenSoldOut = () => <p className="text-soldout">Ürün satıldı</p>;
 
   const putAcceptOffer = async (highOffer) => {
-    await sendOffer.put(`/offers/${highOffer.id}`, {
-      isStatus: true,
-    }).then(await sendOffer.put(`/products/${highOffer.product}`, {
-      isOfferable: false,
-    }));
-    handleReceivedOffers();
-    handleGivenOffers();
+    setIsLoading(true);
+    let mounted = true;
+    try {
+      if (mounted) {
+        await sendOffer.put(`/offers/${highOffer.id}`, {
+          isStatus: true,
+        }).then(await sendOffer.put(`/products/${highOffer.product}`, {
+          isOfferable: false,
+        }));
+        handleReceivedOffers();
+        handleGivenOffers();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+    return () => {
+      mounted = false;
+    };
   };
 
   const postRejectOffer = async (highOffer) => {
-    await sendOffer.put(`/offers/${highOffer.id}`, {
-      isStatus: false,
-    });
-    handleReceivedOffers();
-    handleGivenOffers();
+    setIsLoading(true);
+    let mounted = true;
+    try {
+      if (mounted) {
+        await sendOffer.put(`/offers/${highOffer.id}`, {
+          isStatus: false,
+        });
+        handleReceivedOffers();
+        handleGivenOffers();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+    return () => {
+      mounted = false;
+    };
   };
   const receivedOffered = () => (
     <>

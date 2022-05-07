@@ -10,7 +10,7 @@ import axios from '../../api/axios';
 
 function OfferModal({ displayModal, closeModal }) {
   const {
-    product, setProduct, setProducts,
+    product, setProduct, setProducts, setIsLoading,
   } = useProduct();
   const [selectedOption, setSelectedOption] = useState(0);
   const [offer, setOffer] = useState({ offeredPrice: 0 });
@@ -59,25 +59,38 @@ function OfferModal({ displayModal, closeModal }) {
   }, [displayModal, closeModal]);
 
   const handleSubmit = async () => {
-    if (selectedOption === 3 && isValid && customPrice !== '') {
-      await sendOffer.post('/offers', {
-        product: product.id,
-        offerPrice: parseFloat(customPrice),
-        users_permissions_user: myID,
-      });
+    setIsLoading(true);
+    let mounted = true;
+    try {
+      if (mounted) {
+        if (selectedOption === 3 && isValid && customPrice !== '') {
+          await sendOffer.post('/offers', {
+            product: product.id,
+            offerPrice: parseFloat(customPrice),
+            users_permissions_user: myID,
+          });
+        }
+        if (selectedOption !== 3) {
+          await sendOffer.post('/offers', {
+            product: product.id,
+            offerPrice: offer.offeredPrice,
+            users_permissions_user: myID,
+          });
+        }
+        const response = await axios(`/products/${product.id}`);
+        setProduct(response.data);
+        const newProducts = await axios('/products');
+        setProducts(newProducts.data);
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
-    if (selectedOption !== 3) {
-      await sendOffer.post('/offers', {
-        product: product.id,
-        offerPrice: offer.offeredPrice,
-        users_permissions_user: myID,
-      });
-    }
-    const response = await axios(`/products/${product.id}`);
-    setProduct(response.data);
-    const newProducts = await axios('/products');
-    setProducts(newProducts.data);
-    closeModal();
+    return () => {
+      mounted = false;
+    };
   };
 
   const {
