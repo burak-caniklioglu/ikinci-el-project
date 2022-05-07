@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { StrictMode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/style.scss';
 import { BrowserRouter } from 'react-router-dom';
@@ -7,11 +7,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StrictMode>,
+
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+
   document.getElementById('root'),
 );
 
