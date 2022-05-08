@@ -1,12 +1,15 @@
 @import "../../styles/style.scss";
 
 .main-section {
-  min-height: calc(100vh - 8rem);
+  min-height: calc(100vh);
   width: 100%;
   overflow-y: auto;
+  padding-top: 8rem;
   background-color: $_F2F2F2;
   @include screenSize("medium") {
-    min-height: calc(100vh - 6rem);
+    min-height: calc(100vh);
+    padding-top: 6rem;
+
   }
 
   .main-container {
