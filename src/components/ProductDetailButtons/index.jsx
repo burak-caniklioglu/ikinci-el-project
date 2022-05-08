@@ -29,7 +29,7 @@ function ProductDetailButtons({ setOfferModal, setConfirmModal }) {
   if (id === Number(myID)) {
     return (
       <div className="content-btn-area">
-        <button type="submit" className="btn sold">Bu Ürün Size Ait Teklif Vermezsiniz</button>
+        <button type="submit" className="btn sold">Bu Ürün Size Ait Teklif Veremezsiniz</button>
       </div>
     );
   }

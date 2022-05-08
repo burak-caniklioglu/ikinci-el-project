@@ -19,7 +19,6 @@ function ProductDetail() {
   } = useProduct();
   const [displayConfirmModal, setDisplayConfirmModal] = useState(false);
   const [displayOfferModal, setDisplayOfferModal] = useState(false);
-  console.log(product);
 
   useEffect(() => {
     let isMounted = true;
