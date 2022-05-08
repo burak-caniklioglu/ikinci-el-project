@@ -1,7 +1,7 @@
 @import "../../styles/style.scss";
 
 .account-container {
-  min-height: calc(100vh - 8rem);
+  min-height: calc(100vh - 8rem) !important;
   width: 100%;
   background-color: $_F2F2F2;
   padding-top: 2rem;
