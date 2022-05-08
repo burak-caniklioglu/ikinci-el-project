@@ -22,7 +22,7 @@
         max-width: 120rem;
       }
       @include screenSize("small") {
-        max-width: calc(100vw - 2rem);
+        width: calc(100vw - 2rem);
         margin: 1rem auto;
         padding: 1rem;
         padding-bottom: 7rem;

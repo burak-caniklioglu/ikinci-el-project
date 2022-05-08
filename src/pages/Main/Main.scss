@@ -20,7 +20,8 @@
       max-width: 120rem;
     }
     @include screenSize("medium") {
-      max-width: calc(100vw - 2rem);
+      width: calc(100vw - 2rem);
+      margin: 0 auto;
       padding-top: 1rem;
     }
   }
