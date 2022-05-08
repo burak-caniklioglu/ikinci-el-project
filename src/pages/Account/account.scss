@@ -9,6 +9,7 @@
   box-sizing: border-box;
   @include screenSize("medium") {
     min-height: calc(100vh);
+    padding-top:7rem;
   }
 
   .account-wrapper {
