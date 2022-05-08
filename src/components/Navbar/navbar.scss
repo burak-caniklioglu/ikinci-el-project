@@ -4,6 +4,8 @@
   width: 100%;
   height: 8rem;
   font-family: "Nunito", sans-serif;
+  position: fixed;
+  background-color: $_FFFFFFF;
   @include display-flex(row, center, center);
   @include screenSize("medium") {
     height: 6rem;
