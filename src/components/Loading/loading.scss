@@ -2,7 +2,7 @@
 
 .loading-container {
   @include display-flex(row, center, center);
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba($color: $_F0F8FF, $alpha: 0.3);
   width: 100%;
   position: fixed;
   inset: 0;
@@ -14,6 +14,7 @@
   }
   .combine-two div {
     --rotation: 45;
+    color: $_4B9CE2;
     position: absolute;
     -webkit-transform: rotate(calc(var(--rotation) * 1deg));
     transform: rotate(calc(var(--rotation) * 1deg));
@@ -30,12 +31,15 @@
   }
   .combine-two div:nth-child(2) {
     --rotation: 135;
+    color:greenyellow;
   }
   .combine-two div:nth-child(3) {
     --rotation: 225;
+    color: $_4B9CE2;
   }
   .combine-two div:nth-child(4) {
     --rotation: 315;
+    color:greenyellow;
   }
 }
 

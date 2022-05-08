@@ -67,6 +67,7 @@
     input::placeholder,
     textarea::placeholder {
       color: rgba(153, 160, 167, 1);
+      padding:0.5rem;
       @include screenSize("large") {
         padding: 0.5rem 1rem;
         font-size: 1.4rem;
@@ -184,7 +185,7 @@
 
 .not-valid {
   border: 1px solid $_F77474 !important;
-  background-color: $_FFFFFFF !important;
+  background-color: $_FFF2F2 !important;
   color: $_F77474 !important;
 }
 .not-valid-ico {

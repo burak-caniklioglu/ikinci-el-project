@@ -84,7 +84,7 @@
         @include display-flex(row, center, flex-start);
         font-size: 1.5rem;
         text-align: end;
-        margin-left: 1rem;
+        margin-right: 2rem !important;
         @include screenSize('small') {
           padding: 0.8rem 0;
         }

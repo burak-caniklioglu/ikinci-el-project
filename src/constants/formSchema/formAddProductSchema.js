@@ -10,6 +10,9 @@ const formAddProductSchema = Yup.object().shape({
   color: Yup
     .string()
     .required('Ürün rengi boş bırakılamaz.'),
+  brand: Yup
+    .string()
+    .required('Ürün markası boş bırakılamaz.'),
   price: Yup
     .number(),
   category: Yup

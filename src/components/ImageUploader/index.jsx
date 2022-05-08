@@ -16,7 +16,7 @@ function ImageUploader({ handlePreview, handleUpload }) {
           maxCount={1}
           onPreview={handlePreview}
           onChange={handleUpload}
-          showUploadList={{ showRemoveIcon: false }}
+          showUploadList={{ showRemoveIcon: true }}
           accept=".png, .jpg, .jpeg"
           progress={{
             strokeWidth: 3,

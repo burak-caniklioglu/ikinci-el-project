@@ -1,12 +1,12 @@
 @import "../../styles/style.scss";
 
 .product-detail-container {
-  min-height: calc(100vh - 8rem);
+  min-height: calc(100vh - 10rem);
   width: 100%;
   background-color: $_F2F2F2;
   padding-top: 2rem;
   @include screenSize("medium") {
-    min-height: calc(100vh - 6rem);
+    min-height: calc(100vh - 8rem);
     padding-top:1rem;
   }
   @include screenSize("small") {

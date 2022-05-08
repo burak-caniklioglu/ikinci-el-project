@@ -17,6 +17,7 @@ import ToggleSwitch from '../ToggleSwitch';
 import './addProductForm.scss';
 import { useProduct } from '../../contexts/ProductContext';
 import axios from '../../api/axios';
+import toastify from '../../helper funcs/toastify';
 
 function AddProductForm() {
   const [categories] = useCategories();
@@ -88,6 +89,7 @@ function AddProductForm() {
         handleChange,
         errors,
         handleSubmit,
+        touched,
       }) => (
         <form onSubmit={handleSubmit} className="add-product-content-wrapper">
           <div className="add-product-content-detail-wrapper">
@@ -106,7 +108,7 @@ function AddProductForm() {
                   onChange={handleChange}
                   placeholder="Örnek: Iphone 12 Pro Max"
                   maxLength="100"
-                  className={errors?.name ? 'not-valid' : ''}
+                  className={touched.name && errors?.name ? 'not-valid' : ''}
                 />
               </div>
               <div className="form-row">
@@ -121,14 +123,14 @@ function AddProductForm() {
                   value={values.description}
                   maxLength="500"
                   onChange={handleChange}
-                  className={errors?.description ? 'not-valid' : ''}
+                  className={touched.description && errors?.description ? 'not-valid' : ''}
                 />
               </div>
 
               <div className="form-row-multi">
                 <div className="input-group">
                   <label htmlFor="category"> Kategori</label>
-                  <select className="custom-select" name="category" id="category" value={values.category} onChange={handleChange}>
+                  <select className={touched.category && errors.category ? 'custom-select not-valid ' : 'custom-select'} name="category" id="category" value={values.category} onChange={handleChange}>
                     <option value="">Kategori Seç</option>
                     {categories.map((category) => (
                       <option key={category.id} value={category.id}>{category.name}</option>
@@ -139,7 +141,7 @@ function AddProductForm() {
                   <label htmlFor="brand">
                     Marka
                   </label>
-                  <select className="custom-select" name="brand" id="brand" value={values.brand} onChange={handleChange}>
+                  <select className={touched.brand && errors.brand ? 'custom-select not-valid ' : 'custom-select'} name="brand" id="brand" value={values.brand} onChange={handleChange}>
                     <option value="">Marka Seç</option>
                     {brands.map((brand) => (
                       <option key={brand.id} value={brand.name}>{brand.name}</option>
@@ -150,7 +152,7 @@ function AddProductForm() {
               <div className="form-row-multi">
                 <div className="input-group">
                   <label htmlFor="color">Renk</label>
-                  <select className="custom-select" name="color" id="color" value={values.color} onChange={handleChange}>
+                  <select className={touched.color && errors.color ? 'custom-select not-valid ' : 'custom-select'} name="color" id="color" value={values.color} onChange={handleChange}>
                     <option value="">Renk Seç</option>
                     {colors.map((color) => (
                       <option key={color.id} value={color.name}>{color.name}</option>
@@ -159,7 +161,7 @@ function AddProductForm() {
                 </div>
                 <div className="input-group">
                   <label htmlFor="status">Kullanım Durumu</label>
-                  <select className="custom-select" name="status" id="status" value={values.status} onChange={handleChange}>
+                  <select className={touched.status && errors.status ? 'custom-select not-valid ' : 'custom-select'} name="status" id="status" value={values.status} onChange={handleChange}>
                     <option value="">Kullanım Durumu Seç</option>
                     {usingStatuses.map((Status) => (
                       <option key={Status.id} value={Status.name}>{Status.name}</option>
