@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.20.2",
     "axios": "^0.26.1",
+    "cypress": "^9.6.0",
     "formik": "^2.2.9",
     "js-cookie": "^3.0.1",
     "prop-types": "^15.8.1",
