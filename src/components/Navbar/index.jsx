@@ -20,6 +20,7 @@ function Navbar() {
           <Link to="/">
             <Logo
               aria-label="Logo"
+              name="logo"
               size={width < 768 ? 99.33 : 128.94}
               onClick={() => getProduct}
             />
@@ -30,6 +31,7 @@ function Navbar() {
           <Link to="/addproduct">
             <button
               type="button"
+              name="addproduct"
               aria-label="Add Product"
               className="nav-btn btn-add-product"
             >
@@ -45,6 +47,7 @@ function Navbar() {
             <Link to="/myaccount">
               <button
                 type="button"
+                name="myaccount"
                 className="nav-btn btn-add-product"
                 aria-label="My Account"
               >
@@ -58,6 +61,7 @@ function Navbar() {
               <Link to="/login">
                 <button
                   type="button"
+                  name="login"
                   className="nav-btn btn-login"
                   aria-label="Login"
                 >
