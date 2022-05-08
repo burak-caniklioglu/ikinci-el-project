@@ -176,7 +176,7 @@ function AddProductForm() {
                   type="text"
                   name="price"
                   id="price"
-                  className={errors?.price ? 'not-valid' : 'price'}
+                  className={touched.status && errors?.price ? 'not-valid' : 'price'}
                   placeholder="Bir fiyat girin"
                   value={values.price}
                   onChange={handleChange}
