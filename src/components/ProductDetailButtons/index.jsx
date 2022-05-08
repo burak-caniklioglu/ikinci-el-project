@@ -16,6 +16,24 @@ function ProductDetailButtons({ setOfferModal, setConfirmModal }) {
     }
     return null;
   });
+  const { id } = product.users_permissions_user;
+
+  if (id === Number(myID) && product?.isSold) {
+    return (
+      <div className="content-btn-area">
+        <button type="submit" className="btn sold">Ürününüz Satıldı</button>
+      </div>
+    );
+  }
+
+  if (id === Number(myID)) {
+    return (
+      <div className="content-btn-area">
+        <button type="submit" className="btn sold">Bu Ürün Size Ait Teklif Vermezsiniz</button>
+      </div>
+    );
+  }
+
   const handleDelete = async () => {
     await sendOffer.delete(`/offers/${givenOffer.id}`);
     const response = await axios(`/products/${product.id}`);
