@@ -4,7 +4,7 @@
 .error-container{
   max-width: 148rem;
   margin: 0 auto;
-  padding-top: 2rem;
+  padding-top: 10rem;
 
   @include screenSize('xxlarge') {
     max-width: 95vw;
