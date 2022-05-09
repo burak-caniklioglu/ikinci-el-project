@@ -75,12 +75,17 @@ git clone https://github.com/burak-caniklioglu/ikinci-el-project.git
 # install dependencies with npm
 npm install
 # or install dependencies with yarn
-yarn
+yarn install
 
 # serve at localhost:3000
 npm start or yarn start
 ```
 
+```
+# test
+yarn run cypress open
+'click' ikinciElLoginRegister.test.js
+```
 # Previews
 
 <center>

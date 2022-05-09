@@ -181,7 +181,7 @@ function AddProductForm() {
                   value={values.price}
                   onChange={handleChange}
                 />
-                <p className={errors?.price ? 'not-valid-ico' : ''}>TL</p>
+                <p className={touched.status && errors?.price ? 'not-valid-ico' : ''}>TL</p>
                 {errors?.price && (
                 <span>0-9 Arasında Bir Rakam Girin </span>
                 )}
