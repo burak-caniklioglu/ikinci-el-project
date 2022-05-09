@@ -2,12 +2,12 @@ import React from 'react';
 import { useProduct } from '../../contexts/ProductContext';
 import Product from '../ProductItem';
 import './products.scss';
-import useInfinitiveScroll from '../../hooks/useInfinitiveScroll';
+// import useInfinitiveScroll from '../../hooks/useInfinitiveScroll';
 
 function Products() {
-  const limit = useInfinitiveScroll();
+  // const limit = useInfinitiveScroll();
   const { products, activeCategory } = useProduct();
-  const filteredProducts = products?.slice(0, limit).filter((item) => {
+  const filteredProducts = products?.filter((item) => {
     if (activeCategory === 'Hepsi') {
       return item;
     } if (activeCategory === 'Diğer') {
