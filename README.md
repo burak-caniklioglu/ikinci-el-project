@@ -39,6 +39,8 @@ You can access the live demo from the link here: [ <b> Live Demo</b> ](https://p
 
 - If the seller rejects the highest bid, the product offer is shown as rejected in the vendor panel unless there is a higher bid than it. The purpose here is interpreted as the seller expects a higher offer.
 
+- The product owner cannot buy or bid on her/his own product.
+
 - If you already have an account, you can log in or use the site by registering.
 
 - The application is designed for web and mobile. All UI designs are responsive.
