@@ -57,6 +57,7 @@ You can access the live demo from the link here: [ <b> Live Demo</b> ](https://p
 - Yup
 - Ant Design Upload
 - Toastify
+- Cypress
 - Netlify
 
 <br>
