@@ -63,19 +63,21 @@ function ProductProvider({ children }) {
     try {
       if (mounted) {
         const myID = Cookies.get('myId');
-        const response = await axios.get(
-          `/offers?users_permissions_user=${myID}`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-              Authorization: `Bearer ${Cookies?.get('token')}`,
+        if (myID) {
+          const response = await axios.get(
+            `/offers?users_permissions_user=${myID}`,
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: `Bearer ${Cookies?.get('token')}`,
+              },
             },
-          },
-        );
-        const newGivenOffers = response.data.filter((item) => item.product !== null);
+          );
+          const newGivenOffers = response.data.filter((item) => item.product !== null);
 
-        setGivenOffers(newGivenOffers);
+          setGivenOffers(newGivenOffers);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -92,17 +94,19 @@ function ProductProvider({ children }) {
     try {
       if (mounted) {
         const myID = Cookies.get('myId');
-        const response = await sendOffer.get(
-          `/products?users_permissions_user=${myID}`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-              Authorization: `Bearer ${Cookies?.get('token')}`,
+        if (myID) {
+          const response = await sendOffer.get(
+            `/products?users_permissions_user=${myID}`,
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: `Bearer ${Cookies?.get('token')}`,
+              },
             },
-          },
-        );
-        setReceivedOffers(response.data);
+          );
+          setReceivedOffers(response.data);
+        }
       }
     } catch (error) {
       console.log(error);
