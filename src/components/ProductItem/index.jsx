@@ -12,7 +12,7 @@ function Product({ product }) {
   return (
     <div className="card__item" role="none" onClick={() => moreClick(product)}>
       <figure className="card__item-img">
-        <img src={image === 'null' || !image?.formats?.small ? UndefinedProduct : `https://bootcamp.akbolat.net${image?.formats?.small?.url}`} alt="item-img" />
+        <img src={image === 'null' || !image?.formats?.small ? UndefinedProduct : `${process.env.REACT_APP_IMAGE_URL}${image?.formats?.small?.url}`} alt="item-img" />
       </figure>
       <div className="card__item-content">
         <div className="card__item-info">

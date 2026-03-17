@@ -16,7 +16,6 @@ import formAddProductSchema from '../../constants/formSchema/formAddProductSchem
 import ToggleSwitch from '../ToggleSwitch';
 import './addProductForm.scss';
 import { useProduct } from '../../contexts/ProductContext';
-import axios from '../../api/axios';
 import toastify from '../../helper funcs/toastify';
 
 function AddProductForm() {
@@ -27,7 +26,7 @@ function AddProductForm() {
   const [previewImage, setPreviewImage] = useState('');
   const [previewVisible, setPreviewVisible] = useState(false);
   const [fileList, setFileList] = useState([]);
-  const { setProducts, setIsLoading } = useProduct();
+  const { getProducts, setIsLoading } = useProduct();
   const myID = Cookies.get('myId');
   const navigate = useNavigate();
 
@@ -37,6 +36,10 @@ function AddProductForm() {
   };
 
   const handleUpload = ({ file }) => {
+    if (file.status === 'removed') {
+      setFileList([]);
+      return;
+    }
     setFileList([file]);
   };
 
@@ -45,22 +48,46 @@ function AddProductForm() {
     let mounted = true;
     try {
       if (mounted) {
-        const formData = new FormData();
-        formData.append('data', JSON.stringify(productData));
-        if (fileList.length > 0 || fileList[0].size < 400000) {
-          formData.append('files.image', fileList[0].originFileObj);
-        } else {
+        if (fileList.length === 0) {
+          toastify('error', 'Lütfen bir ürün görseli yükleyin.');
           return;
         }
-        const response = await sendOffer.post('/products', formData);
+
+        const file = fileList[0];
+        if (file.size >= 400000) {
+          toastify('error', 'Dosya boyutu çok büyük. Maksimum 400KB olmalıdır.');
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(productData));
+        const rawFile = file.originFileObj || file;
+        formData.append('files.image', rawFile);
+
+        await sendOffer.post('/products', formData);
         setFileList([]);
-        const newProducts = await axios('/products');
-        setProducts(newProducts.data);
+        await getProducts();
+        toastify('success', 'Ürün başarıyla eklendi!');
         navigate('/myaccount');
         mounted = false;
       }
     } catch (error) {
-      console.log(error);
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 413) {
+          toastify('error', 'Dosya boyutu sunucu tarafından reddedildi. Daha küçük bir görsel deneyin.');
+        } else if (status === 401 || status === 403) {
+          toastify('error', 'Oturum süreniz dolmuş. Lütfen tekrar giriş yapın.');
+        } else if (status === 400) {
+          toastify('error', 'Görsel yüklenemedi. Lütfen dosya formatını (PNG/JPEG) kontrol edin.');
+        } else {
+          toastify('error', 'Ürün eklenirken bir hata oluştu. Lütfen tekrar deneyin.');
+        }
+      } else if (error.request) {
+        toastify('error', 'Sunucuya bağlanılamadı. İnternet bağlantınızı kontrol edin.');
+      } else {
+        toastify('error', 'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -133,7 +160,7 @@ function AddProductForm() {
                   <select className={touched.category && errors.category ? 'custom-select not-valid ' : 'custom-select'} name="category" id="category" value={values.category} onChange={handleChange}>
                     <option value="">Kategori Seç</option>
                     {categories.map((category) => (
-                      <option key={category.id} value={category.id}>{category.name}</option>
+                      <option key={category.id} value={category.name}>{category.name}</option>
                     ))}
                   </select>
                 </div>

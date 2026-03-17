@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const baseURL = 'https://bootcamp.akbolat.net';
+const baseURL = process.env.REACT_APP_API_URL;
 const sendOffer = axios.create({
   baseURL,
 });
@@ -13,7 +13,9 @@ sendOffer.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
       config.headers.accept = 'application/json';
-      config.headers['Content-Type'] = 'application/json';
+      if (!(config.data instanceof FormData)) {
+        config.headers['Content-Type'] = 'application/json';
+      }
     }
 
     return config;

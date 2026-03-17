@@ -107,7 +107,7 @@ function OfferModal({ displayModal, closeModal }) {
           <div className="modal-info-body">
             <div className="product-info">
               <div className="product-info-left">
-                <img src={product?.image === 'null' ? UndefinedProduct : `https://bootcamp.akbolat.net${image?.formats?.thumbnail?.url}`} alt={name} />
+                <img src={product?.image === 'null' ? UndefinedProduct : `${process.env.REACT_APP_IMAGE_URL}${image?.formats?.thumbnail?.url}`} alt={name} />
                 <p className="product-title">
                   {name}
                 </p>
