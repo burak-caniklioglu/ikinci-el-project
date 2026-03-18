@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import propTypes from 'prop-types';
-import Cookies from 'js-cookie';
 import sendOffer from '../../api/sendOffer';
 import './offer-modal.scss';
 import { useProduct } from '../../contexts/ProductContext';
@@ -16,7 +15,6 @@ function OfferModal({ displayModal, closeModal }) {
   const [offer, setOffer] = useState({ offeredPrice: 0 });
   const [customPrice, setCustomPrice] = useState('');
   const [isValid, setIsValid] = useState(true);
-  const myID = Cookies.get('myId');
 
   useEffect(() => {
     setIsValid(customPrice.match(/^\d+?.$/) !== null);
@@ -67,14 +65,12 @@ function OfferModal({ displayModal, closeModal }) {
           await sendOffer.post('/offers', {
             product: product.id,
             offerPrice: parseFloat(customPrice),
-            users_permissions_user: myID,
           });
         }
         if (selectedOption !== 3) {
           await sendOffer.post('/offers', {
             product: product.id,
             offerPrice: offer.offeredPrice,
-            users_permissions_user: myID,
           });
         }
         const response = await axios(`/products/${product.id}`);
