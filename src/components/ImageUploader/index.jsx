@@ -8,7 +8,7 @@ import UploadIcon from '../../constants/icons/Upload';
 const MAX_FILE_SIZE = 400000; // 400KB
 const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg'];
 
-function ImageUploader({ handlePreview, handleUpload }) {
+function ImageUploader({ handlePreview, handleUpload, disabled }) {
   const beforeUpload = (file) => {
     const isAllowedType = ALLOWED_TYPES.includes(file.type);
     if (!isAllowedType) {
@@ -34,12 +34,13 @@ function ImageUploader({ handlePreview, handleUpload }) {
         <h1>Ürün Görseli</h1>
         <Upload.Dragger
           listType="picture"
-          maxCount={1}
+          maxCount={5}
           onPreview={handlePreview}
           onChange={handleUpload}
           beforeUpload={beforeUpload}
           showUploadList={{ showRemoveIcon: true }}
           accept=".png, .jpg, .jpeg"
+          disabled={disabled}
           progress={{
             strokeWidth: 3,
             format: (percent) => `${percent}%`,
@@ -64,5 +65,10 @@ function ImageUploader({ handlePreview, handleUpload }) {
 ImageUploader.propTypes = {
   handlePreview: propTypes.func.isRequired,
   handleUpload: propTypes.func.isRequired,
+  disabled: propTypes.bool,
+};
+
+ImageUploader.defaultProps = {
+  disabled: false,
 };
 export default ImageUploader;

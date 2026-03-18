@@ -4,16 +4,19 @@ import OfferListInfo from '../AccountOfferInfo';
 import UndefinedProduct from '../../constants/images/undefinedProduct.webp';
 import './offerList-Item.scss';
 import { useProduct } from '../../contexts/ProductContext';
+import getImageUrl from '../../helper funcs/getImageUrl';
 
 function OfferListItem({ item, type }) {
   const { moreClick } = useProduct();
+  const receivedOfferImageUrl = getImageUrl(item?.image);
+  const givenOfferImageUrl = getImageUrl(item?.product?.image);
   if (type === 'receivedOffers') {
     return (
       <div className="offer__item">
         <div className="offer__item-wrapper">
           <div className="offer__item-content">
             <div className="offer__item-content-img" role="none" onClick={() => moreClick(item)}>
-              <img src={item?.image === 'null' ? UndefinedProduct : `${process.env.REACT_APP_IMAGE_URL}${item?.image?.formats?.thumbnail?.url}`} alt="product-img" />
+              <img src={receivedOfferImageUrl || UndefinedProduct} alt="product-img" />
             </div>
             <div className="offer__item-content-body">
               <div className="offer__item-content-detail">
@@ -48,7 +51,7 @@ function OfferListItem({ item, type }) {
       <div className="offer__item-wrapper">
         <div className="offer__item-content">
           <div className="offer__item-content-img" role="none" onClick={() => moreClick(item?.product)}>
-            <img src={item?.product?.image === null ? UndefinedProduct : `${process.env.REACT_APP_IMAGE_URL}${item?.product?.image?.formats?.thumbnail?.url}`} alt="product-img" />
+            <img src={givenOfferImageUrl || UndefinedProduct} alt="product-img" />
           </div>
           <div className="offer__item-content-body">
             <div className="offer__item-content-detail">

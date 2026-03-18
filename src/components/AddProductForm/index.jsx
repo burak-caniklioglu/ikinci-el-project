@@ -17,6 +17,7 @@ import ToggleSwitch from '../ToggleSwitch';
 import './addProductForm.scss';
 import { useProduct } from '../../contexts/ProductContext';
 import toastify from '../../helper funcs/toastify';
+import uploadToCloudinary from '../../helper funcs/uploadToCloudinary';
 
 function AddProductForm() {
   const [categories] = useCategories();
@@ -26,6 +27,7 @@ function AddProductForm() {
   const [previewImage, setPreviewImage] = useState('');
   const [previewVisible, setPreviewVisible] = useState(false);
   const [fileList, setFileList] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { getProducts, setIsLoading } = useProduct();
   const myID = Cookies.get('myId');
   const navigate = useNavigate();
@@ -35,61 +37,62 @@ function AddProductForm() {
     setPreviewVisible(true);
   };
 
-  const handleUpload = ({ file }) => {
-    if (file.status === 'removed') {
-      setFileList([]);
-      return;
-    }
-    setFileList([file]);
+  const handleUpload = ({ fileList: nextFileList }) => {
+    setFileList(nextFileList);
   };
 
   const submitHandler = async (productData) => {
     setIsLoading(true);
-    let mounted = true;
+    setIsSubmitting(true);
     try {
-      if (mounted) {
-        if (fileList.length === 0) {
-          toastify('error', 'Lütfen bir ürün görseli yükleyin.');
-          return;
-        }
-
-        const file = fileList[0];
-        if (file.size >= 400000) {
-          toastify('error', 'Dosya boyutu çok büyük. Maksimum 400KB olmalıdır.');
-          return;
-        }
-
-        const formData = new FormData();
-        formData.append('data', JSON.stringify(productData));
-        const rawFile = file.originFileObj || file;
-        formData.append('files.image', rawFile);
-
-        await sendOffer.post('/products', formData);
-        setFileList([]);
-        await getProducts();
-        toastify('success', 'Ürün başarıyla eklendi!');
-        navigate('/myaccount');
-        mounted = false;
+      if (fileList.length === 0) {
+        toastify('error', 'Lutfen bir urun gorseli yukleyin.');
+        return;
       }
+
+      const rawFiles = fileList
+        .map((file) => file.originFileObj || file)
+        .filter(Boolean);
+
+      const oversizedFile = rawFiles.find((file) => file.size >= 400000);
+      if (oversizedFile) {
+        toastify('error', 'Dosya boyutu cok buyuk. Maksimum 400KB olmalidir.');
+        return;
+      }
+
+      const uploadedImageUrls = await Promise.all(rawFiles.map((file) => uploadToCloudinary(file)));
+
+      const payload = {
+        ...productData,
+        image: uploadedImageUrls[0],
+        images: uploadedImageUrls,
+      };
+
+      await sendOffer.post('/products', payload);
+      setFileList([]);
+      await getProducts();
+      toastify('success', 'Urun basariyla eklendi!');
+      navigate('/myaccount');
     } catch (error) {
       if (error.response) {
         const { status } = error.response;
         if (status === 413) {
-          toastify('error', 'Dosya boyutu sunucu tarafından reddedildi. Daha küçük bir görsel deneyin.');
+          toastify('error', 'Dosya boyutu sunucu tarafindan reddedildi. Daha kucuk bir gorsel deneyin.');
         } else if (status === 401 || status === 403) {
-          toastify('error', 'Oturum süreniz dolmuş. Lütfen tekrar giriş yapın.');
+          toastify('error', 'Oturum sureniz dolmus. Lutfen tekrar giris yapin.');
         } else if (status === 400) {
-          toastify('error', 'Görsel yüklenemedi. Lütfen dosya formatını (PNG/JPEG) kontrol edin.');
+          toastify('error', 'Gorsel yuklenemedi. Lutfen dosya formatini (PNG/JPEG) kontrol edin.');
         } else {
-          toastify('error', 'Ürün eklenirken bir hata oluştu. Lütfen tekrar deneyin.');
+          toastify('error', 'Urun eklenirken bir hata olustu. Lutfen tekrar deneyin.');
         }
       } else if (error.request) {
-        toastify('error', 'Sunucuya bağlanılamadı. İnternet bağlantınızı kontrol edin.');
+        toastify('error', 'Sunucuya baglanilamadi. Internet baglantinizi kontrol edin.');
       } else {
-        toastify('error', 'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.');
+        toastify('error', error.message || 'Beklenmeyen bir hata olustu. Lutfen tekrar deneyin.');
       }
     } finally {
       setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
   return (
@@ -230,9 +233,13 @@ function AddProductForm() {
             </div>
           </div>
           <div className="right-side">
-            <ImageUploader handleUpload={handleUpload} handlePreview={handlePreview} />
-            <button type="submit" className="save-btn">
-              Kaydet
+            <ImageUploader
+              handleUpload={handleUpload}
+              handlePreview={handlePreview}
+              disabled={isSubmitting}
+            />
+            <button type="submit" className="save-btn" disabled={isSubmitting}>
+              {isSubmitting ? 'Kaydediliyor...' : 'Kaydet'}
             </button>
           </div>
         </form>

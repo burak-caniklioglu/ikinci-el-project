@@ -6,6 +6,7 @@ import './offer-modal.scss';
 import { useProduct } from '../../contexts/ProductContext';
 import UndefinedProduct from '../../constants/images/undefinedProduct.webp';
 import axios from '../../api/axios';
+import getImageUrl from '../../helper funcs/getImageUrl';
 
 function OfferModal({ displayModal, closeModal }) {
   const {
@@ -92,6 +93,7 @@ function OfferModal({ displayModal, closeModal }) {
   const {
     image, name, price,
   } = product;
+  const imageUrl = getImageUrl(image);
   return ReactDOM.createPortal(
     <main className={displayModal ? 'modal-wrapper ' : 'off-modal-wrapper'}>
       <section className="modal-info">
@@ -103,7 +105,7 @@ function OfferModal({ displayModal, closeModal }) {
           <div className="modal-info-body">
             <div className="product-info">
               <div className="product-info-left">
-                <img src={product?.image === 'null' ? UndefinedProduct : `${process.env.REACT_APP_IMAGE_URL}${image?.formats?.thumbnail?.url}`} alt={name} />
+                <img src={imageUrl || UndefinedProduct} alt={name} />
                 <p className="product-title">
                   {name}
                 </p>

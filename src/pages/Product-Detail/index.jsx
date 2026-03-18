@@ -9,6 +9,7 @@ import OfferModal from '../../components/OfferModal';
 import ProductDetailButtons from '../../components/ProductDetailButtons';
 import UndefinedProduct from '../../constants/images/undefinedProduct.webp';
 import { useProduct } from '../../contexts/ProductContext';
+import getImageUrl from '../../helper funcs/getImageUrl';
 import './product-detail.scss';
 
 function ProductDetail() {
@@ -60,6 +61,7 @@ function ProductDetail() {
   const {
     image, name, brand, color, status, price, description,
   } = product;
+  const imageUrl = getImageUrl(image);
   return (
     <div>
       {product?.id && (
@@ -70,7 +72,7 @@ function ProductDetail() {
           <div className="product-detail-wrapper">
             <div className="product-detail">
               <figure className="product-detail-img">
-                <img src={product?.image === 'null' || !image?.formats?.small ? UndefinedProduct : `${process.env.REACT_APP_IMAGE_URL}${image?.formats?.small?.url}`} alt="product-img" />
+                <img src={imageUrl || UndefinedProduct} alt="product-img" />
               </figure>
               <div className="product-detail-content">
                 <div className="content-title">{name}</div>
