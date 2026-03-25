@@ -19,6 +19,8 @@ function ProductProvider({ children }) {
   const [givenOffers, setGivenOffers] = useState([]);
   const [receivedOffers, setReceivedOffers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isProductsLoading, setIsProductsLoading] = useState(true);
+  const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
 
   const navigate = useNavigate();
   const moreClick = (item) => {
@@ -40,6 +42,7 @@ function ProductProvider({ children }) {
   };
 
   const getProducts = async () => {
+    setIsProductsLoading(true);
     setIsLoading(true);
     let mounted = true;
     try {
@@ -50,6 +53,7 @@ function ProductProvider({ children }) {
     } catch (error) {
       console.log(error);
     } finally {
+      setIsProductsLoading(false);
       setIsLoading(false);
     }
     return () => {
@@ -151,6 +155,10 @@ function ProductProvider({ children }) {
         handleReceivedOffers,
         isLoading,
         setIsLoading,
+        isProductsLoading,
+        setIsProductsLoading,
+        isCategoriesLoading,
+        setIsCategoriesLoading,
       }}
     >
       {children}

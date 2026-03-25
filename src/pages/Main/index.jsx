@@ -8,12 +8,15 @@ import Loading from '../../components/Loading';
 import { useProduct } from '../../contexts/ProductContext';
 
 function Main() {
-  const { isLoading } = useProduct();
+  const { isProductsLoading, isCategoriesLoading } = useProduct();
+
+  const isMainDataLoading = isProductsLoading || isCategoriesLoading;
+
   return (
     <>
       <Navbar />
       <main className="main-section">
-        <section>{isLoading && <Loading />}</section>
+        <section>{isMainDataLoading && <Loading />}</section>
         <section className="main-container">
           <figure className="main-banner">
             <MainBanner />

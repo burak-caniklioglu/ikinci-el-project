@@ -3,9 +3,10 @@ import axios from '../api/axios';
 import { useProduct } from '../contexts/ProductContext';
 
 function useCategories() {
-  const { categories, setCategories } = useProduct();
+  const { categories, setCategories, setIsCategoriesLoading } = useProduct();
 
   useEffect(() => {
+    setIsCategoriesLoading(true);
     // eslint-disable-next-line no-unused-vars
     let isCurrent = false;
     const fetchData = async () => {
@@ -22,6 +23,8 @@ function useCategories() {
         setCategories(data);
       } catch (error) {
         console.log(error.response);
+      } finally {
+        setIsCategoriesLoading(false);
       }
     };
     if (!isCurrent) { fetchData(); }
